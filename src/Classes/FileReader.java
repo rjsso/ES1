@@ -7,9 +7,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
+/**
+ * Classe para leitura dos ficheiros E-mail/Spam e Regras
+ * 
+ * @author Kevin Corrales nº 73529
+ *
+ */
 public class FileReader {
-
+	
+	/**
+	 * Ler ficheiro que contém as regras de spam e criar uma lista com estas regras.
+	 * 
+	 * @param localização do ficheiro
+	 * @return lista das regras
+	 */
 	public List<Rule> getRulesFromFile(String location) {
 		Scanner scanner = null;
 		List<Rule> rulesList= new ArrayList<Rule>();
@@ -29,6 +40,11 @@ public class FileReader {
 		return rulesList;
 	}
 	
+	/**
+	 * Ler ficheiro que contém os emails ou spams e criar uma lista com estes emails/spams.
+	 * @param localização do ficheiro
+	 * @return lista de emails ou spams
+	 */
 	public List<Email> getEmailsFromFile(String location) {
 		Scanner scanner = null;
 		List<Email> emailList= new ArrayList<Email>();

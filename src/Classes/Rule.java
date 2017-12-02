@@ -1,7 +1,18 @@
 package Classes;
 
+/**
+ * Esta classe tem como objetivo identificar uma regra de um e-mail (classe "Email")
+ * 
+ * @author Kevin Corrales nº 73529
+ *
+ */
 public class Rule {
 
+	/**
+	 * Atributos:
+	 * 		rule -> identifica a regra
+	 * 		weight -> peso da regra 
+	 */
 	private String rule ;
 	private int weight ;
 	
