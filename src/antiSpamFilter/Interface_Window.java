@@ -8,17 +8,32 @@ import java.awt.Component;
 import javax.swing.Box;
 import java.awt.BorderLayout;
 import javax.swing.JTextPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import Classes.Email;
+import Classes.FileReader;
+import Classes.Rule;
+
 import javax.swing.JLabel;
 import javax.swing.JScrollBar;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JSeparator;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
 public class Interface_Window {
-
+	
+	
 	private JFrame frame;
+	private List<Rule> rulesList;
+	private List<Email> hamList;
+	private List<Email> spamList;
 
 	/**
 	 * Launch the application.
@@ -71,7 +86,7 @@ public class Interface_Window {
 		lblNewLabel.setBounds(345, 11, 46, 25);
 		panel.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("$Spamlog");
+		JLabel lblNewLabel_1 = new JLabel("Spamlog");
 		lblNewLabel_1.setBounds(345, 62, 46, 25);
 		panel.add(lblNewLabel_1);
 		
@@ -99,7 +114,7 @@ public class Interface_Window {
 		JButton button_1 = new JButton("Set");
 		button_1.setBounds(270, 11, 65, 25);
 		panel.add(button_1);
-		
+			
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(10, 160, 414, 143);
 		frame.getContentPane().add(panel_1);
@@ -142,7 +157,7 @@ public class Interface_Window {
 		btnNewButton_2.setBounds(289, 91, 125, 23);
 		panel_1.add(btnNewButton_2);
 		
-		JLabel lblManuelConfiguration = new JLabel("Manuel Configuration");
+		JLabel lblManuelConfiguration = new JLabel("Manual Configuration");
 		lblManuelConfiguration.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblManuelConfiguration.setBounds(109, 11, 181, 14);
 		panel_1.add(lblManuelConfiguration);
@@ -194,5 +209,64 @@ public class Interface_Window {
 		lblAutomaticConfiguration.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblAutomaticConfiguration.setBounds(109, 11, 181, 14);
 		panel_2.add(lblAutomaticConfiguration);
+		
+		//Kevin
+		
+		FileReader reader = new FileReader();
+		
+		btnNewButton.addActionListener( new ActionListener()
+		{
+		    @Override
+		    public void actionPerformed(ActionEvent e)
+		    {
+		    	JFileChooser chooser = new JFileChooser();
+		    	FileNameExtensionFilter filter = new FileNameExtensionFilter(
+		                "Log Files",  "log");
+		        chooser.setFileFilter(filter);
+		        int returnVal = chooser.showOpenDialog(null);
+		        if(returnVal == JFileChooser.APPROVE_OPTION) {
+		        	lblNewLabel_1.setText(chooser.getSelectedFile().getName());
+		        	spamList = reader.getEmailsFromFile(chooser.getSelectedFile().getPath());
+		        }
+		    }
+		});
+		
+		button.addActionListener( new ActionListener()
+		{
+		    @Override
+		    public void actionPerformed(ActionEvent e)
+		    {
+		    	JFileChooser chooser = new JFileChooser();
+		    	FileNameExtensionFilter filter = new FileNameExtensionFilter(
+		    			 "Log Files",  "log");
+		        chooser.setFileFilter(filter);
+		        int returnVal = chooser.showOpenDialog(null);
+		        if(returnVal == JFileChooser.APPROVE_OPTION) {
+		        	lblNewLabel_2.setText(chooser.getSelectedFile().getName());
+		        	hamList = reader.getEmailsFromFile(chooser.getSelectedFile().getPath());
+		        }
+		    }
+		});
+		
+		button_1.addActionListener( new ActionListener()
+		{
+		    @Override
+		    public void actionPerformed(ActionEvent e)
+		    {
+		    	JFileChooser chooser = new JFileChooser();
+		    	FileNameExtensionFilter filter = new FileNameExtensionFilter(
+		    			 "Configuration Files",  "cf");
+		        chooser.setFileFilter(filter);
+		        int returnVal = chooser.showOpenDialog(null);
+		        if(returnVal == JFileChooser.APPROVE_OPTION) {
+		        	lblNewLabel.setText(chooser.getSelectedFile().getName());
+		        	
+		        	rulesList = reader.getRulesFromFile(chooser.getSelectedFile().getPath());
+		        	for(Rule rule : rulesList) {
+		        		textArea.append(rule.getRule() + "\n");
+		        	}
+		        }
+		    }
+		});
 	}
 }
