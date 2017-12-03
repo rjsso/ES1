@@ -26,6 +26,8 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import javax.swing.JList;
+import java.awt.Color;
 
 public class Interface_Window {
 	
@@ -63,12 +65,12 @@ public class Interface_Window {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 500);
+		frame.setBounds(100, 100, 467, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 11, 414, 149);
+		panel.setBounds(10, 11, 431, 149);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -116,13 +118,25 @@ public class Interface_Window {
 		panel.add(button_1);
 			
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(10, 160, 414, 143);
+		panel_1.setBounds(10, 160, 431, 143);
 		frame.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
+		
+		JButton btnNewButton_1 = new JButton("avaliar configura\u00E7\u00E3o");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnNewButton_1.setBounds(286, 40, 144, 23);
+		panel_1.add(btnNewButton_1);
 		
 		JScrollBar scrollBar = new JScrollBar();
 		scrollBar.setBounds(273, 39, 17, 75);
 		panel_1.add(scrollBar);
+		
+		JButton btnNewButton_2 = new JButton("gravar configura\u00E7\u00E3o");
+		btnNewButton_2.setBounds(289, 91, 141, 23);
+		panel_1.add(btnNewButton_2);
 		
 		JTextArea textArea = new JTextArea();
 		textArea.setBounds(147, 39, 132, 75);
@@ -140,31 +154,22 @@ public class Interface_Window {
 		textArea_2.setBounds(123, 11, -102, 91);
 		panel_1.add(textArea_2);
 		
-		JTextArea textArea_3 = new JTextArea();
-		textArea_3.setEditable(false);
-		textArea_3.setBounds(10, 39, 132, 75);
-		panel_1.add(textArea_3);
-		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(57, 141, 1, 2);
 		panel_1.add(separator);
-		
-		JButton btnNewButton_1 = new JButton("avaliar configura\u00E7\u00E3o");
-		btnNewButton_1.setBounds(286, 40, 128, 23);
-		panel_1.add(btnNewButton_1);
-		
-		JButton btnNewButton_2 = new JButton("gravar configura\u00E7\u00E3o");
-		btnNewButton_2.setBounds(289, 91, 125, 23);
-		panel_1.add(btnNewButton_2);
 		
 		JLabel lblManuelConfiguration = new JLabel("Manual Configuration");
 		lblManuelConfiguration.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblManuelConfiguration.setBounds(109, 11, 181, 14);
 		panel_1.add(lblManuelConfiguration);
 		
+		JList list = new JList();
+		list.setBounds(31, 39, 112, 74);
+		panel_1.add(list);
+		
 		JPanel panel_2 = new JPanel();
 		panel_2.setLayout(null);
-		panel_2.setBounds(10, 307, 414, 143);
+		panel_2.setBounds(10, 307, 431, 143);
 		frame.getContentPane().add(panel_2);
 		
 		JScrollBar scrollBar_1 = new JScrollBar();
@@ -188,27 +193,26 @@ public class Interface_Window {
 		textArea_6.setBounds(123, 11, -102, 91);
 		panel_2.add(textArea_6);
 		
-		JTextArea textArea_7 = new JTextArea();
-		textArea_7.setEditable(false);
-		textArea_7.setBounds(10, 39, 132, 75);
-		panel_2.add(textArea_7);
-		
 		JSeparator separator_2 = new JSeparator();
 		separator_2.setBounds(57, 141, 1, 2);
 		panel_2.add(separator_2);
 		
 		JButton btnGerarConfiguraoAutomatica = new JButton("gerar configura\u00E7\u00E3o automatica");
-		btnGerarConfiguraoAutomatica.setBounds(289, 40, 125, 23);
+		btnGerarConfiguraoAutomatica.setBounds(289, 40, 142, 23);
 		panel_2.add(btnGerarConfiguraoAutomatica);
 		
 		JButton btnGravarConfiguraao = new JButton("gravar configura\u00E7ao");
-		btnGravarConfiguraao.setBounds(289, 91, 125, 23);
+		btnGravarConfiguraao.setBounds(289, 91, 142, 23);
 		panel_2.add(btnGravarConfiguraao);
 		
 		JLabel lblAutomaticConfiguration = new JLabel("Automatic Configuration");
 		lblAutomaticConfiguration.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblAutomaticConfiguration.setBounds(109, 11, 181, 14);
 		panel_2.add(lblAutomaticConfiguration);
+		
+		JList list_1 = new JList();
+		list_1.setBounds(31, 39, 112, 74);
+		panel_2.add(list_1);
 		
 		//Kevin
 		
