@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Component;
 import javax.swing.Box;
+import javax.swing.DefaultListModel;
+
 import java.awt.BorderLayout;
 import javax.swing.JTextPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -25,6 +27,11 @@ import javax.swing.JFileChooser;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.JList;
 import java.awt.Color;
@@ -84,11 +91,11 @@ public class Interface_Window {
 		textPane_1.setBounds(26, 113, 243, 25);
 		panel.add(textPane_1);
 		
-		JLabel lblNewLabel = new JLabel("Rules.cf");
+		JLabel lblNewLabel = new JLabel("Rules Path");
 		lblNewLabel.setBounds(345, 11, 46, 25);
 		panel.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Spamlog");
+		JLabel lblNewLabel_1 = new JLabel("Spam Path");
 		lblNewLabel_1.setBounds(345, 62, 46, 25);
 		panel.add(lblNewLabel_1);
 		
@@ -97,7 +104,7 @@ public class Interface_Window {
 		textPane_2.setBounds(26, 62, 243, 25);
 		panel.add(textPane_2);
 		
-		JLabel lblNewLabel_2 = new JLabel("Ham.log");
+		JLabel lblNewLabel_2 = new JLabel("Ham Path");
 		lblNewLabel_2.setBounds(345, 113, 46, 25);
 		panel.add(lblNewLabel_2);
 		
@@ -163,7 +170,8 @@ public class Interface_Window {
 		lblManuelConfiguration.setBounds(109, 11, 181, 14);
 		panel_1.add(lblManuelConfiguration);
 		
-		JList list = new JList();
+		DefaultListModel<String> model = new DefaultListModel<>();
+		JList<String> list = new JList<>(model);
 		list.setBounds(31, 39, 112, 74);
 		panel_1.add(list);
 		
@@ -229,6 +237,7 @@ public class Interface_Window {
 		        chooser.setFileFilter(filter);
 		        int returnVal = chooser.showOpenDialog(null);
 		        if(returnVal == JFileChooser.APPROVE_OPTION) {
+		        	textPane_2.setText(chooser.getSelectedFile().getPath());
 		        	lblNewLabel_1.setText(chooser.getSelectedFile().getName());
 		        	spamList = reader.getEmailsFromFile(chooser.getSelectedFile().getPath());
 		        }
@@ -246,6 +255,7 @@ public class Interface_Window {
 		        chooser.setFileFilter(filter);
 		        int returnVal = chooser.showOpenDialog(null);
 		        if(returnVal == JFileChooser.APPROVE_OPTION) {
+		        	textPane_1.setText(chooser.getSelectedFile().getPath());
 		        	lblNewLabel_2.setText(chooser.getSelectedFile().getName());
 		        	hamList = reader.getEmailsFromFile(chooser.getSelectedFile().getPath());
 		        }
@@ -263,14 +273,47 @@ public class Interface_Window {
 		        chooser.setFileFilter(filter);
 		        int returnVal = chooser.showOpenDialog(null);
 		        if(returnVal == JFileChooser.APPROVE_OPTION) {
+		        	textPane.setText(chooser.getSelectedFile().getPath());
 		        	lblNewLabel.setText(chooser.getSelectedFile().getName());
-		        	
 		        	rulesList = reader.getRulesFromFile(chooser.getSelectedFile().getPath());
+		        	
 		        	for(Rule rule : rulesList) {
-		        		textArea.append(rule.getRule() + "\n");
+		        		model.addElement(rule.getRule());
 		        	}
 		        }
 		    }
 		});
+		
+		btnNewButton_2.addActionListener( new ActionListener() {
+			@Override
+		    public void actionPerformed(ActionEvent e)
+		    {
+				saveRuleValues(textArea,textPane.getText());
+		    }
+		});
+	}
+	
+	public void saveRuleValues(JTextArea textarea,String file) {
+		String s[] = textarea.getText().split("\\r?\\n");
+	    ArrayList<String>ruleValues = new ArrayList<>(Arrays.asList(s));
+	    
+	    PrintWriter writer ;
+		try {
+			writer = new PrintWriter(file, "UTF-8");
+				for(int i=0; i<rulesList.size();i++) {
+					if(i<ruleValues.size()) {
+						writer.println(rulesList.get(i).getRule() + " " + ruleValues.get(i));
+					}else {
+						writer.println(rulesList.get(i).getRule());
+					}
+				}
+		    writer.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+	    
+	    
 	}
 }
