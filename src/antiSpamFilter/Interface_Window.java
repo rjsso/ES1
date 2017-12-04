@@ -38,9 +38,17 @@ import java.util.List;
 import javax.swing.JList;
 import java.awt.Color;
 
+/**
+ * Esta classe tem como objetivo de apresentar um interface simples e limpo para a realizacao de 
+ * todas as accoes desejadas.
+ *  
+ * @author Miguel Rodrigues nº 73541
+ */
+
 public class Interface_Window {
 	
-	
+	JLabel lblFpMC = new JLabel("FP:");
+	JLabel lblFnMc = new JLabel("FN:");
 	private JFrame frame;
 	private List<Rule> rulesList;
 	private List<Email> hamList;
@@ -77,108 +85,118 @@ public class Interface_Window {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 467, 500);
+		frame.setBounds(100, 100, 485, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(10, 11, 431, 149);
-		frame.getContentPane().add(panel);
-		panel.setLayout(null);
+		JPanel panelPaths = new JPanel();
+		panelPaths.setBounds(10, 11, 449, 149);
+		frame.getContentPane().add(panelPaths);
+		panelPaths.setLayout(null);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setEditable(false);
-		textPane.setBounds(26, 11, 243, 25);
-		panel.add(textPane);
+		JTextPane pathRulesFinder = new JTextPane();
+		pathRulesFinder.setEditable(false);
+		pathRulesFinder.setBounds(26, 11, 243, 25);
+		panelPaths.add(pathRulesFinder);
 		
-		JTextPane textPane_1 = new JTextPane();
-		textPane_1.setEditable(false);
-		textPane_1.setBounds(26, 113, 243, 25);
-		panel.add(textPane_1);
+		JTextPane pathHamFinder = new JTextPane();
+		pathHamFinder.setEditable(false);
+		pathHamFinder.setBounds(26, 113, 243, 25);
+		panelPaths.add(pathHamFinder);
 		
 		JLabel lblNewLabel = new JLabel("Rules Path");
-		lblNewLabel.setBounds(345, 11, 46, 25);
-		panel.add(lblNewLabel);
+		lblNewLabel.setBounds(345, 11, 94, 25);
+		panelPaths.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Spam Path");
-		lblNewLabel_1.setBounds(345, 62, 46, 25);
-		panel.add(lblNewLabel_1);
+		lblNewLabel_1.setBounds(345, 62, 94, 25);
+		panelPaths.add(lblNewLabel_1);
 		
-		JTextPane textPane_2 = new JTextPane();
-		textPane_2.setEditable(false);
-		textPane_2.setBounds(26, 62, 243, 25);
-		panel.add(textPane_2);
+		JTextPane pathSpamFinder = new JTextPane();
+		pathSpamFinder.setEditable(false);
+		pathSpamFinder.setBounds(26, 62, 243, 25);
+		panelPaths.add(pathSpamFinder);
 		
 		JLabel lblNewLabel_2 = new JLabel("Ham Path");
-		lblNewLabel_2.setBounds(345, 113, 46, 25);
-		panel.add(lblNewLabel_2);
+		lblNewLabel_2.setBounds(345, 113, 94, 25);
+		panelPaths.add(lblNewLabel_2);
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(10, 136, 1, 2);
-		panel.add(separator_1);
+		panelPaths.add(separator_1);
 		
-		JButton btnNewButton = new JButton("Set");
-		btnNewButton.setBounds(270, 62, 65, 25);
-		panel.add(btnNewButton);
+		JButton btnSpamSetting = new JButton("Set");
+		btnSpamSetting.setBounds(270, 62, 65, 25);
+		panelPaths.add(btnSpamSetting);
 		
-		JButton button = new JButton("Set");
-		button.setBounds(270, 113, 65, 25);
-		panel.add(button);
+		JButton btnHamSetting = new JButton("Set");
+		btnHamSetting.setBounds(270, 113, 65, 25);
+		panelPaths.add(btnHamSetting);
 		
-		JButton button_1 = new JButton("Set");
-		button_1.setBounds(270, 11, 65, 25);
-		panel.add(button_1);
+		JButton btnRulesSetting = new JButton("Set");
+		btnRulesSetting.setBounds(270, 11, 65, 25);
+		panelPaths.add(btnRulesSetting);
 			
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(10, 160, 431, 143);
-		frame.getContentPane().add(panel_1);
-		panel_1.setLayout(null);
+		JPanel panelManualConf = new JPanel();
+		panelManualConf.setBounds(10, 160, 449, 143);
+		frame.getContentPane().add(panelManualConf);
+		panelManualConf.setLayout(null);
+		lblFpMC.setForeground(Color.RED);
 		
-		JButton btnNewButton_1 = new JButton("avaliar configura\u00E7\u00E3o");
-		btnNewButton_1.setBounds(286, 40, 144, 23);
-		panel_1.add(btnNewButton_1);
+
+		lblFpMC.setBounds(147, 118, 101, 14);
+		panelManualConf.add(lblFpMC);
+		lblFnMc.setForeground(Color.GREEN);
+		lblFnMc.setBackground(Color.WHITE);
 		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(273, 39, 17, 75);
-		panel_1.add(scrollBar);
+		lblFnMc.setBounds(57, 118, 80, 14);
+		panelManualConf.add(lblFnMc);
 		
-		JButton btnNewButton_2 = new JButton("gravar configura\u00E7\u00E3o");
-		btnNewButton_2.setBounds(289, 91, 141, 23);
-		panel_1.add(btnNewButton_2);
+		JButton btnAvaliacaoConf = new JButton("avaliar configura\u00E7\u00E3o");
+		btnAvaliacaoConf.setBounds(295, 39, 144, 23);
+		panelManualConf.add(btnAvaliacaoConf);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(147, 39, 132, 75);
-		panel_1.add(textArea);
+		JScrollBar scrollbarManuelConf = new JScrollBar();
+		scrollbarManuelConf.setBounds(273, 39, 17, 75);
+		panelManualConf.add(scrollbarManuelConf);
+		
+		JButton btnGravarMconf = new JButton("gravar configura\u00E7\u00E3o");
+		btnGravarMconf.setBounds(298, 91, 141, 23);
+		panelManualConf.add(btnGravarMconf);
+		
+		JTextArea mCediting = new JTextArea();
+		mCediting.setBounds(147, 39, 132, 75);
+		panelManualConf.add(mCediting);
 		
 		JTextPane textPane_3 = new JTextPane();
 		textPane_3.setBounds(126, 11, -105, 103);
-		panel_1.add(textPane_3);
+		panelManualConf.add(textPane_3);
 		
 		JTextArea textArea_1 = new JTextArea();
 		textArea_1.setBounds(125, 11, -104, 103);
-		panel_1.add(textArea_1);
+		panelManualConf.add(textArea_1);
 		
 		JTextArea textArea_2 = new JTextArea();
 		textArea_2.setBounds(123, 11, -102, 91);
-		panel_1.add(textArea_2);
+		panelManualConf.add(textArea_2);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(57, 141, 1, 2);
-		panel_1.add(separator);
+		panelManualConf.add(separator);
 		
-		JLabel lblManuelConfiguration = new JLabel("Manual Configuration");
-		lblManuelConfiguration.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblManuelConfiguration.setBounds(109, 11, 181, 14);
-		panel_1.add(lblManuelConfiguration);
+		JLabel lblManuelConfigurationTitle = new JLabel("Manual Configuration");
+		lblManuelConfigurationTitle.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblManuelConfigurationTitle.setBounds(109, 11, 181, 14);
+		panelManualConf.add(lblManuelConfigurationTitle);
 		
 		DefaultListModel<String> model = new DefaultListModel<>();
-		JList<String> list = new JList<>(model);
-		list.setBounds(31, 39, 112, 74);
-		panel_1.add(list);
+		JList<String> mCList = new JList<>(model);
+		mCList.setBounds(31, 39, 112, 74);
+		panelManualConf.add(mCList);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setLayout(null);
-		panel_2.setBounds(10, 307, 431, 143);
+		panel_2.setBounds(10, 307, 449, 143);
 		frame.getContentPane().add(panel_2);
 		
 		JScrollBar scrollBar_1 = new JScrollBar();
@@ -207,11 +225,11 @@ public class Interface_Window {
 		panel_2.add(separator_2);
 		
 		JButton btnGerarConfiguraoAutomatica = new JButton("gerar configura\u00E7\u00E3o automatica");
-		btnGerarConfiguraoAutomatica.setBounds(289, 40, 142, 23);
+		btnGerarConfiguraoAutomatica.setBounds(297, 39, 142, 23);
 		panel_2.add(btnGerarConfiguraoAutomatica);
 		
 		JButton btnGravarConfiguraao = new JButton("gravar configura\u00E7ao");
-		btnGravarConfiguraao.setBounds(289, 91, 142, 23);
+		btnGravarConfiguraao.setBounds(297, 91, 142, 23);
 		panel_2.add(btnGravarConfiguraao);
 		
 		JLabel lblAutomaticConfiguration = new JLabel("Automatic Configuration");
@@ -223,11 +241,18 @@ public class Interface_Window {
 		list_1.setBounds(31, 39, 112, 74);
 		panel_2.add(list_1);
 		
+		JLabel label = new JLabel("FP:");
+		label.setBounds(147, 118, 46, 14);
+		panel_2.add(label);
+		
+		JLabel label_1 = new JLabel("FN:");
+		label_1.setBounds(57, 118, 46, 14);
+		panel_2.add(label_1);
 		//Kevin
 		
 		FileReader reader = new FileReader();
 		
-		btnNewButton.addActionListener( new ActionListener()
+		btnSpamSetting.addActionListener( new ActionListener()
 		{
 		    @Override
 		    public void actionPerformed(ActionEvent e)
@@ -238,14 +263,14 @@ public class Interface_Window {
 		        chooser.setFileFilter(filter);
 		        int returnVal = chooser.showOpenDialog(null);
 		        if(returnVal == JFileChooser.APPROVE_OPTION) {
-		        	textPane_2.setText(chooser.getSelectedFile().getPath());
+		        	pathSpamFinder.setText(chooser.getSelectedFile().getPath());
 		        	lblNewLabel_1.setText(chooser.getSelectedFile().getName());
 		        	spamList = reader.getEmailsFromFile(chooser.getSelectedFile().getPath());
 		        }
 		    }
 		});
 		
-		button.addActionListener( new ActionListener()
+		btnHamSetting.addActionListener( new ActionListener()
 		{
 		    @Override
 		    public void actionPerformed(ActionEvent e)
@@ -256,14 +281,14 @@ public class Interface_Window {
 		        chooser.setFileFilter(filter);
 		        int returnVal = chooser.showOpenDialog(null);
 		        if(returnVal == JFileChooser.APPROVE_OPTION) {
-		        	textPane_1.setText(chooser.getSelectedFile().getPath());
+		        	pathHamFinder.setText(chooser.getSelectedFile().getPath());
 		        	lblNewLabel_2.setText(chooser.getSelectedFile().getName());
 		        	hamList = reader.getEmailsFromFile(chooser.getSelectedFile().getPath());
 		        }
 		    }
 		});
 		
-		button_1.addActionListener( new ActionListener()
+		btnRulesSetting.addActionListener( new ActionListener()
 		{
 		    @Override
 		    public void actionPerformed(ActionEvent e)
@@ -274,7 +299,7 @@ public class Interface_Window {
 		        chooser.setFileFilter(filter);
 		        int returnVal = chooser.showOpenDialog(null);
 		        if(returnVal == JFileChooser.APPROVE_OPTION) {
-		        	textPane.setText(chooser.getSelectedFile().getPath());
+		        	pathRulesFinder.setText(chooser.getSelectedFile().getPath());
 		        	lblNewLabel.setText(chooser.getSelectedFile().getName());
 		        	rulesList = reader.getRulesFromFile(chooser.getSelectedFile().getPath());
 		        	
@@ -285,15 +310,15 @@ public class Interface_Window {
 		    }
 		});
 		
-		btnNewButton_2.addActionListener( new ActionListener() {
+		btnGravarMconf.addActionListener( new ActionListener() {
 			@Override
 		    public void actionPerformed(ActionEvent e)
 		    {
-				saveRuleValues(textArea,textPane.getText());
+				saveRuleValues(mCediting,pathRulesFinder.getText());
 		    }
 		});
 		
-		btnNewButton_1.addActionListener(new ActionListener() {
+		btnAvaliacaoConf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				evaluate();
 			}
@@ -328,10 +353,11 @@ public class Interface_Window {
 	public void evaluate() {
 		Analyzer analyzer = new Analyzer() ;
 		if(hamList==null || rulesList==null || spamList==null) {
-			System.out.println("Escolha todos os ficheiros"); // criar mensagem de erro
+/*Miguel*/	ErrorMessage error = new ErrorMessage();
+			error.errorMessage();
 		}else {
-			this.fn = analyzer.getFNcount(hamList, rulesList); //.setText() atenção que função retorna inteiro
-			this.fp = analyzer.getFPcount(spamList, rulesList);
+/*Miguel*/	lblFnMc.setText("FN: " + String.valueOf(analyzer.getFNcount(hamList, rulesList))); //.setText() atenção que função retorna inteiro
+/*Miguel*/  lblFpMC.setText("FP: " + String.valueOf(analyzer.getFPcount(spamList, rulesList)));
 			System.out.println("FN: " + fn);
 			System.out.println("FP: " + fp);
 			// analyzer.getFPpercentage(hamlist,rulesList) e fazer pro spam tambem
