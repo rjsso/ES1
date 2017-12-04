@@ -29,10 +29,9 @@ public class Analyzer {
 					
 					for(int k=0; k<rulesList.size();k++) {
 						Rule ruleItem = rulesList.get(k);
-						if(ruleItem.getWeight()<5 && spamRule.equals(ruleItem.getRule())) {
-							fp_counter++;
-						}
-							
+							if(ruleItem.getWeight()<5 && spamRule.equals(ruleItem.getRule())) {
+								fp_counter++;
+							}
 					}
 			}
 		}

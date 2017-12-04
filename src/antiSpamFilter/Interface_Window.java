@@ -11,7 +11,9 @@ import javax.swing.DefaultListModel;
 import java.awt.BorderLayout;
 import javax.swing.JTextPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
+import Classes.Analyzer;
 import Classes.Email;
 import Classes.FileReader;
 import Classes.Rule;
@@ -43,6 +45,9 @@ public class Interface_Window {
 	private List<Rule> rulesList;
 	private List<Email> hamList;
 	private List<Email> spamList;
+	private int fp=0; //por atributo textfield ou label
+	private int fn=0;
+	//adicionar tambem a percentagem
 
 	/**
 	 * Launch the application.
@@ -130,10 +135,6 @@ public class Interface_Window {
 		panel_1.setLayout(null);
 		
 		JButton btnNewButton_1 = new JButton("avaliar configura\u00E7\u00E3o");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		btnNewButton_1.setBounds(286, 40, 144, 23);
 		panel_1.add(btnNewButton_1);
 		
@@ -291,29 +292,49 @@ public class Interface_Window {
 				saveRuleValues(textArea,textPane.getText());
 		    }
 		});
+		
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				evaluate();
+			}
+		});
 	}
 	
 	public void saveRuleValues(JTextArea textarea,String file) {
 		String s[] = textarea.getText().split("\\r?\\n");
-	    ArrayList<String>ruleValues = new ArrayList<>(Arrays.asList(s));
+	    ArrayList<String>rulesValues = new ArrayList<>(Arrays.asList(s));
 	    
-	    PrintWriter writer ;
-		try {
-			writer = new PrintWriter(file, "UTF-8");
-				for(int i=0; i<rulesList.size();i++) {
-					if(i<ruleValues.size()) {
-						writer.println(rulesList.get(i).getRule() + " " + ruleValues.get(i));
-					}else {
-						writer.println(rulesList.get(i).getRule());
+	    if(!file.isEmpty()) {
+	    	PrintWriter writer ;
+			try {
+				writer = new PrintWriter(file, "UTF-8");
+					for(int i=0; i<rulesList.size();i++) {
+						if(i<rulesValues.size()) {
+							writer.println(rulesList.get(i).getRule() + " " + rulesValues.get(i));
+							rulesList.get(i).setWeight(Integer.parseInt(rulesValues.get(i)));
+						}else {
+							writer.println(rulesList.get(i).getRule());
+						}
 					}
-				}
-		    writer.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+			    writer.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+	    }
+	}
+	
+	public void evaluate() {
+		Analyzer analyzer = new Analyzer() ;
+		if(hamList==null || rulesList==null || spamList==null) {
+			System.out.println("Escolha todos os ficheiros"); // criar mensagem de erro
+		}else {
+			this.fn = analyzer.getFNcount(hamList, rulesList); //.setText() atenção que função retorna inteiro
+			this.fp = analyzer.getFPcount(spamList, rulesList);
+			System.out.println("FN: " + fn);
+			System.out.println("FP: " + fp);
+			// analyzer.getFPpercentage(hamlist,rulesList) e fazer pro spam tambem
 		}
-	    
-	    
 	}
 }
