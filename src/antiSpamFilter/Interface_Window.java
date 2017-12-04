@@ -264,7 +264,6 @@ public class Interface_Window {
 		        int returnVal = chooser.showOpenDialog(null);
 		        if(returnVal == JFileChooser.APPROVE_OPTION) {
 		        	pathSpamFinder.setText(chooser.getSelectedFile().getPath());
-		        	lblNewLabel_1.setText(chooser.getSelectedFile().getName());
 		        	spamList = reader.getEmailsFromFile(chooser.getSelectedFile().getPath());
 		        }
 		    }
@@ -282,7 +281,6 @@ public class Interface_Window {
 		        int returnVal = chooser.showOpenDialog(null);
 		        if(returnVal == JFileChooser.APPROVE_OPTION) {
 		        	pathHamFinder.setText(chooser.getSelectedFile().getPath());
-		        	lblNewLabel_2.setText(chooser.getSelectedFile().getName());
 		        	hamList = reader.getEmailsFromFile(chooser.getSelectedFile().getPath());
 		        }
 		    }
@@ -300,11 +298,13 @@ public class Interface_Window {
 		        int returnVal = chooser.showOpenDialog(null);
 		        if(returnVal == JFileChooser.APPROVE_OPTION) {
 		        	pathRulesFinder.setText(chooser.getSelectedFile().getPath());
-		        	lblNewLabel.setText(chooser.getSelectedFile().getName());
 		        	rulesList = reader.getRulesFromFile(chooser.getSelectedFile().getPath());
+		        	mCediting.setText("");
 		        	
 		        	for(Rule rule : rulesList) {
 		        		model.addElement(rule.getRule());
+		        		mCediting.append(rule.getWeight()+"\n");
+		        		
 		        	}
 		        }
 		    }
@@ -325,6 +325,30 @@ public class Interface_Window {
 		});
 	}
 	
+	public static boolean isInteger(String str) {
+	    if (str == null) {
+	        return false;
+	    }
+	    int length = str.length();
+	    if (length == 0) {
+	        return false;
+	    }
+	    int i = 0;
+	    if (str.charAt(0) == '-') {
+	        if (length == 1) {
+	            return false;
+	        }
+	        i = 1;
+	    }
+	    for (; i < length; i++) {
+	        char c = str.charAt(i);
+	        if (c < '0' || c > '9') {
+	            return false;
+	        }
+	    }
+	    return true;
+	}
+	
 	public void saveRuleValues(JTextArea textarea,String file) {
 		String s[] = textarea.getText().split("\\r?\\n");
 	    ArrayList<String>rulesValues = new ArrayList<>(Arrays.asList(s));
@@ -334,11 +358,17 @@ public class Interface_Window {
 			try {
 				writer = new PrintWriter(file, "UTF-8");
 					for(int i=0; i<rulesList.size();i++) {
-						if(i<rulesValues.size()) {
-							writer.println(rulesList.get(i).getRule() + " " + rulesValues.get(i));
-							rulesList.get(i).setWeight(Integer.parseInt(rulesValues.get(i)));
+						if(i<rulesValues.size() && rulesValues.size()>0) {
+							if(isInteger(rulesValues.get(i))) {
+								writer.println(rulesList.get(i).getRule() + " " + rulesValues.get(i));
+								rulesList.get(i).setWeight(Integer.parseInt(rulesValues.get(i)));
+							}else {
+								writer.println(rulesList.get(i).getRule() + " " + 0);
+								rulesList.get(i).setWeight(0);
+								//mensagem de AVISO (NÃO ERRO) que os valores não inteiros são considerados como "0"
+							}
 						}else {
-							writer.println(rulesList.get(i).getRule());
+							writer.println(rulesList.get(i).getRule() + " " + 0);
 						}
 					}
 			    writer.close();
@@ -347,6 +377,8 @@ public class Interface_Window {
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
+	    }else {
+	    	//error choose rules file
 	    }
 	}
 	
@@ -356,11 +388,11 @@ public class Interface_Window {
 /*Miguel*/	ErrorMessage error = new ErrorMessage();
 			error.errorMessage();
 		}else {
-/*Miguel*/	lblFnMc.setText("FN: " + String.valueOf(analyzer.getFNcount(hamList, rulesList))); //.setText() atenção que função retorna inteiro
+/*Miguel*/	lblFnMc.setText("FN: " + String.valueOf(analyzer.getFNcount(hamList, rulesList))); 
 /*Miguel*/  lblFpMC.setText("FP: " + String.valueOf(analyzer.getFPcount(spamList, rulesList)));
-			System.out.println("FN: " + fn);
-			System.out.println("FP: " + fp);
-			// analyzer.getFPpercentage(hamlist,rulesList) e fazer pro spam tambem
+		
+			// example1.setText("FP%: + String.valueOf(analyzer.getFPpercentage(hamlist,rulesList) )) ;
+			//example2.setText("FP%: + String.valueOf(analyzer.getFPpercentage(hamlist,rulesList) )) ;
 		}
 	}
 }

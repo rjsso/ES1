@@ -16,9 +16,9 @@ public class Rule {
 	private String rule ;
 	private int weight = 0;
 	
-	public Rule(String rule) {
+	public Rule(String rule,int weight) {
 		this.rule=rule;
-		this.weight=0;
+		this.weight=weight;
 	}
 	
 	public String getRule() {

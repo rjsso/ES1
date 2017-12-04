@@ -29,7 +29,11 @@ public class FileReader {
 				
 				while(scanner.hasNextLine()){
 					String line = scanner.nextLine();
-					rulesList.add(new Rule(line));
+					List<String> splitLine = Arrays.asList(line.split(" "));
+					int weight=0;
+					if(splitLine.size()>1)
+						weight = Integer.parseInt(splitLine.get(1));
+					rulesList.add(new Rule(splitLine.get(0),weight));
 				}
 				
 			}catch(FileNotFoundException e){
