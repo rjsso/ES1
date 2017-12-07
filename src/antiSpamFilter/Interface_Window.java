@@ -17,6 +17,8 @@ import Classes.Analyzer;
 import Classes.Email;
 import Classes.FileReader;
 import Classes.Rule;
+import Other_Classes.ErrorMessage;
+import Other_Classes.Warning;
 
 import javax.swing.JLabel;
 import javax.swing.JScrollBar;
@@ -365,7 +367,8 @@ public class Interface_Window {
 							}else {
 								writer.println(rulesList.get(i).getRule() + " " + 0);
 								rulesList.get(i).setWeight(0);
-								//mensagem de AVISO (NÃO ERRO) que os valores não inteiros são considerados como "0"
+						    	Warning warn = new Warning();
+								warn.warning();
 							}
 						}else {
 							writer.println(rulesList.get(i).getRule() + " " + 0);
@@ -378,7 +381,8 @@ public class Interface_Window {
 				e.printStackTrace();
 			}
 	    }else {
-	    	//error choose rules file
+	    	ErrorMessage error = new ErrorMessage();
+			error.errorMessage();
 	    }
 	}
 	
