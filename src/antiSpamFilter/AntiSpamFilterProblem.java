@@ -51,6 +51,7 @@ public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 	  		 * Feedback para o jMetal
 	  		 */
 	    System.out.println("its in");
+	    System.out.println("its in");
 	    List<Rule> ruleList = reader.getRulesFromFile("../rules.cf",x);
 	    
 	    solution.setObjective(0,  analyser.getFPcount(reader.getEmailsFromFile("../spam.log"), ruleList));
