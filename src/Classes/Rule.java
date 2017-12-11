@@ -14,9 +14,9 @@ public class Rule {
 	 * 		weight -> peso da regra 
 	 */
 	private String rule ;
-	private int weight = 0;
+	private double weight = 0;
 	
-	public Rule(String rule,int weight) {
+	public Rule(String rule,double weight) {
 		this.rule=rule;
 		this.weight=weight;
 	}
@@ -27,7 +27,7 @@ public class Rule {
 	public void setRule(String rule) {
 		this.rule = rule;
 	}
-	public int getWeight() {
+	public double getWeight() {
 		return weight;
 	}
 	public void setWeight(int weight) {

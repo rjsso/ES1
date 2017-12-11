@@ -6,11 +6,18 @@ import java.util.List;
 import org.uma.jmetal.problem.impl.AbstractDoubleProblem;
 import org.uma.jmetal.solution.DoubleSolution;
 
+import Classes.Analyzer;
+import Classes.FileReader;
+import Classes.Rule;
+
 public class AntiSpamFilterProblem extends AbstractDoubleProblem {
+	
+	private Analyzer analyser = new Analyzer();
+	private FileReader reader = new FileReader();
 
 	  public AntiSpamFilterProblem() {
 	    // 10 variables (anti-spam filter rules) by default 
-	    this(10);
+	    this(335);
 	  }
 
 	  public AntiSpamFilterProblem(Integer numberOfVariables) {
@@ -29,7 +36,8 @@ public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 	    setLowerLimit(lowerLimit);
 	    setUpperLimit(upperLimit);
 	  }
-
+	  
+	  
 	  public void evaluate(DoubleSolution solution){
 	    double aux, xi, xj;
 	    double[] fx = new double[getNumberOfObjectives()];
@@ -37,12 +45,15 @@ public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 	    for (int i = 0; i < solution.getNumberOfVariables(); i++) {
 	      x[i] = solution.getVariableValue(i) ;
 	    }
-
-	    // inserir funçoes absolutas de FP e FN
-	    fx[0]=0; //FP
-	    fx[1]=0; //FN
-
-	    solution.setObjective(0, fx[0]);
-	    solution.setObjective(1, fx[1]);
+	    
+	    /**
+	  		 * 
+	  		 * Feedback para o jMetal
+	  		 */
+	    System.out.println("its in");
+	    List<Rule> ruleList = reader.getRulesFromFile("../rules.cf",x);
+	    
+	    solution.setObjective(0,  analyser.getFPcount(reader.getEmailsFromFile("../spam.log"), ruleList));
+	    solution.setObjective(1, analyser.getFNcount(reader.getEmailsFromFile("../ham.log"), ruleList));
 	  }
 	}

@@ -18,7 +18,7 @@ import Classes.Email;
 import Classes.FileReader;
 import Classes.Rule;
 import Other_Classes.ErrorMessage;
-import Other_Classes.Warning;
+//import Other_Classes.Warning;  TODO
 
 import javax.swing.JLabel;
 import javax.swing.JScrollBar;
@@ -367,8 +367,8 @@ public class Interface_Window {
 							}else {
 								writer.println(rulesList.get(i).getRule() + " " + 0);
 								rulesList.get(i).setWeight(0);
-						    	Warning warn = new Warning();
-								warn.warning();
+//						TODO    	Warning warn = new Warning();
+//								warn.warning();
 							}
 						}else {
 							writer.println(rulesList.get(i).getRule() + " " + 0);

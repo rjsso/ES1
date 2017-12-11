@@ -45,6 +45,36 @@ public class FileReader {
 	}
 	
 	/**
+	 * Ler ficheiro que contém as regras de spam e criar uma lista com estas regras, ignorando os pesos nesse mesmo ficheiro e 
+	 * utilizando os pesos dados como argumento
+	 * @author Ricardo Santos 
+	 * @param localização do ficheiro
+	 * @param vetor de pesos
+	 * @return lista das regras
+	 */
+	public List<Rule> getRulesFromFile(String location,double[] vp) {
+		Scanner scanner = null;
+		List<Rule> rulesList= new ArrayList<Rule>();
+			try{
+				scanner = new Scanner(new File(location));
+				int iter =0;
+				while(scanner.hasNextLine()){
+					String line = scanner.nextLine();
+					List<String> splitLine = Arrays.asList(line.split(" "));
+					if(splitLine.size()>1)
+					rulesList.add(new Rule(splitLine.get(0),vp[iter]));
+					iter ++ ;
+				}
+				
+			}catch(FileNotFoundException e){
+				e.printStackTrace();
+			}finally{
+				scanner.close();
+			}
+		return rulesList;
+	}
+	
+	/**
 	 * Ler ficheiro que contém os emails ou spams e criar uma lista com estes emails/spams.
 	 * @param localização do ficheiro
 	 * @return lista de emails ou spams
