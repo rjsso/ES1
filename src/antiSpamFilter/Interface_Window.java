@@ -18,7 +18,8 @@ import Classes.Email;
 import Classes.FileReader;
 import Classes.Rule;
 import Other_Classes.ErrorMessage;
-//import Other_Classes.Warning;  TODO
+//import Other_Classes.Warning;
+import Other_Classes.ErrorMessage2;
 
 import javax.swing.JLabel;
 import javax.swing.JScrollBar;
@@ -32,6 +33,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -39,6 +41,7 @@ import java.util.Arrays;
 import java.util.List;
 import javax.swing.JList;
 import java.awt.Color;
+import javax.swing.ListModel;
 
 /**
  * Esta classe tem como objetivo de apresentar um interface simples e limpo para a realizacao de 
@@ -57,6 +60,7 @@ public class Interface_Window {
 	private List<Email> spamList;
 	private int fp=0; //por atributo textfield ou label
 	private int fn=0;
+	boolean isGenerated;
 	//adicionar tambem a percentagem
 
 	/**
@@ -86,6 +90,7 @@ public class Interface_Window {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+
 		frame = new JFrame();
 		frame.setBounds(100, 100, 485, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -200,6 +205,7 @@ public class Interface_Window {
 		panelManualConf.add(lblManuelConfigurationTitle);
 		
 		DefaultListModel<String> model = new DefaultListModel<>();
+		DefaultListModel<Double> doublemodel = new DefaultListModel<>();
 		JList<String> mCList = new JList<>(model);
 		mCList.setBounds(31, 39, 112, 74);
 		panelManualConf.add(mCList);
@@ -212,11 +218,6 @@ public class Interface_Window {
 		JScrollBar scrollBar_1 = new JScrollBar();
 		scrollBar_1.setBounds(273, 39, 17, 75);
 		panel_2.add(scrollBar_1);
-		
-		JTextArea textArea_4 = new JTextArea();
-		textArea_4.setEditable(false);
-		textArea_4.setBounds(147, 39, 132, 75);
-		panel_2.add(textArea_4);
 		
 		JTextPane textPane_4 = new JTextPane();
 		textPane_4.setBounds(126, 11, -105, 103);
@@ -236,24 +237,24 @@ public class Interface_Window {
 
 		//Automatic Configuration 				
 		
-		
+		isGenerated=false;
 		
 		JButton btnGerarConfiguraoAutomatica = new JButton("gerar configura\u00E7\u00E3o automatica");
 		btnGerarConfiguraoAutomatica.setBounds(297, 39, 142, 23);
 		panel_2.add(btnGerarConfiguraoAutomatica);
 		
-		JButton btnGravarConfiguraao = new JButton("gravar configura\u00E7ao");
-		btnGravarConfiguraao.setBounds(297, 91, 142, 23);
-		panel_2.add(btnGravarConfiguraao);
+		JButton btnGravarAutConf = new JButton("gravar configura\u00E7ao");
+		btnGravarAutConf.setBounds(297, 91, 142, 23);
+		panel_2.add(btnGravarAutConf);
 		
 		JLabel lblAutomaticConfiguration = new JLabel("Automatic Configuration");
 		lblAutomaticConfiguration.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblAutomaticConfiguration.setBounds(109, 11, 181, 14);
 		panel_2.add(lblAutomaticConfiguration);
 		
-		JList list_1 = new JList();
-		list_1.setBounds(31, 39, 112, 74);
-		panel_2.add(list_1);
+		JList aCList = new JList(model);
+		aCList.setBounds(31, 39, 112, 74);
+		panel_2.add(aCList);
 		
 		JLabel label = new JLabel("FP:");
 		label.setBounds(147, 118, 46, 14);
@@ -262,6 +263,10 @@ public class Interface_Window {
 		JLabel label_1 = new JLabel("FN:");
 		label_1.setBounds(57, 118, 46, 14);
 		panel_2.add(label_1);
+		
+		JList aCGenerated = new JList(doublemodel);
+		aCGenerated.setBounds(151, 39, 112, 74);
+		panel_2.add(aCGenerated);
 		//Kevin
 		
 		FileReader reader = new FileReader();
@@ -319,6 +324,7 @@ public class Interface_Window {
 		        	rulesList = reader.getRulesFromFile(chooser.getSelectedFile().getPath());
 		        	mCediting.setText("");
 		        	
+		        	
 		        	for(Rule rule : rulesList) {
 		        		model.addElement(rule.getRule());
 		        		mCediting.append(rule.getWeight()+"\n");
@@ -331,7 +337,7 @@ public class Interface_Window {
 			@Override
 		    public void actionPerformed(ActionEvent e)
 		    {
-				//Add here a geracao...
+				saveRuleValues(mCediting,pathRulesFinder.getText());
 		    }
 		});
 		
@@ -340,20 +346,48 @@ public class Interface_Window {
 				evaluate();
 			}
 		});
-		
+	
 		
 		btnGerarConfiguraoAutomatica.addActionListener( new ActionListener()
 		{
 		    @Override
 		    public void actionPerformed(ActionEvent e)
 		    {
-
+		    	String[] args=new String[0];
+		    	AntiSpamFilterAutomaticConfiguration antiSpam=new AntiSpamFilterAutomaticConfiguration();
+		    	try {
+					AntiSpamFilterAutomaticConfiguration.main(args);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		    	
+		    	
+		    	double[] geracao= reader.getDoubleVector("experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.rs");
+		    	for(int i=0;i<geracao.length;i++)
+		    	doublemodel.addElement(geracao[i]);
+		    	
+		    	isGenerated=true;
 		        }
 		    }
 		);
 		
 		
+		btnGravarAutConf.addActionListener( new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				if(isGenerated==true){
+			    	double[] geracao= reader.getDoubleVector("experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.rs");
+			    	pathRulesFinder.getText();
+			    	reader.getRulesFromFile(pathRulesFinder.getText(), geracao);
+				}
+				else{
+					ErrorMessage2 error= new ErrorMessage2();
+					error.errorMessage();
+				}
+			}
+		});
 		
 		
 		
@@ -399,8 +433,8 @@ public class Interface_Window {
 							}else {
 								writer.println(rulesList.get(i).getRule() + " " + 0);
 								rulesList.get(i).setWeight(0);
-//						TODO    	Warning warn = new Warning();
-//								warn.warning();
+					    	//Warning warn = new Warning();
+							//warn.warning();
 							}
 						}else {
 							writer.println(rulesList.get(i).getRule() + " " + 0);

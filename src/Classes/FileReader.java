@@ -117,29 +117,28 @@ public class FileReader {
  * 
  * @author Miguel Rodrigues nº 73541
  */
-	/*public double[] getDoubleVector(String location){
+	public double[] getDoubleVector(String location){
 		Scanner scanner = null;
-		double[] resulting=null;
+		List<String> splitNumbers=null;
 		
 			try{
 				scanner = new Scanner(new File(location));
 				
-				while(scanner.hasNextLine()){
 					String line = scanner.nextLine();
-					List<String> splitNumbers = Arrays.asList(line.split(" "));
+					splitNumbers = Arrays.asList(line.split(" "));
 					//resulting= new double[splitNumbers.size()];
-						for(int i=1;i<splitNumbers.size();i++) {
-							resulting[i]=Double.parseDouble(splitNumbers.get(i));
-						}
-				}
-				
 			}catch(FileNotFoundException e){
 				e.printStackTrace();
 			}finally{
 				scanner.close();
 			}
-		System.out.print(resulting);
+			double[] resulting= new double[splitNumbers.size()];
+			for(int i=0;i<splitNumbers.size();i++) {
+				resulting[i]=Double.parseDouble(splitNumbers.get(i));
+			}
+			
+			
 		return resulting;
-	}*/
+	}
 
 }

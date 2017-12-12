@@ -11,6 +11,13 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+/**
+ * Esta classe tem como objetivo idicar um erro no correr d
+ * 
+ * @author Kevin Corrales nº 73529
+ *
+ */
+
 public class ErrorMessage extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();

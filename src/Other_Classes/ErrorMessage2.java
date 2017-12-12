@@ -11,19 +11,17 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-public class Warning extends JDialog {
+public class ErrorMessage2 extends JDialog {
 
-	
-	
 	private final JPanel contentPanel = new JPanel();
 
 	/**
 	 * Launch the application.
 	 */
-	public void warning() {
+	public void errorMessage() {
 		try {
-			Warning dialog = new Warning();
-			dialog.setTitle("Files not Found");
+			ErrorMessage2 dialog = new ErrorMessage2();
+			dialog.setTitle("Cannot save an ungenerated configuration");
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -34,7 +32,7 @@ public class Warning extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Warning() {
+	public ErrorMessage2() {
 		
 		setBounds(100, 100, 294, 158);
 		getContentPane().setLayout(new BorderLayout());
@@ -42,7 +40,7 @@ public class Warning extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
-			JLabel lblAddAllFiles = new JLabel("All null values will be equal to zero by default");
+			JLabel lblAddAllFiles = new JLabel("Add all Files to their respective Path files first");
 			lblAddAllFiles.setHorizontalAlignment(SwingConstants.CENTER);
 			contentPanel.add(lblAddAllFiles);
 		}
