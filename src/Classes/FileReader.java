@@ -104,4 +104,42 @@ public class FileReader {
 			}
 		return emailList;
 	}
+
+
+
+
+
+/**
+ * Converter um ficheiro dado uma localizacao num vetor de doubles
+ * @param localização do ficheiro
+ * @return lista de emails ou spams
+ * 
+ * 
+ * @author Miguel Rodrigues nº 73541
+ */
+	/*public double[] getDoubleVector(String location){
+		Scanner scanner = null;
+		double[] resulting=null;
+		
+			try{
+				scanner = new Scanner(new File(location));
+				
+				while(scanner.hasNextLine()){
+					String line = scanner.nextLine();
+					List<String> splitNumbers = Arrays.asList(line.split(" "));
+					//resulting= new double[splitNumbers.size()];
+						for(int i=1;i<splitNumbers.size();i++) {
+							resulting[i]=Double.parseDouble(splitNumbers.get(i));
+						}
+				}
+				
+			}catch(FileNotFoundException e){
+				e.printStackTrace();
+			}finally{
+				scanner.close();
+			}
+		System.out.print(resulting);
+		return resulting;
+	}*/
+
 }

@@ -138,7 +138,10 @@ public class Interface_Window {
 		JButton btnRulesSetting = new JButton("Set");
 		btnRulesSetting.setBounds(270, 11, 65, 25);
 		panelPaths.add(btnRulesSetting);
-			
+
+		//Manual Configuration 		
+		
+		
 		JPanel panelManualConf = new JPanel();
 		panelManualConf.setBounds(10, 160, 449, 143);
 		frame.getContentPane().add(panelManualConf);
@@ -157,19 +160,24 @@ public class Interface_Window {
 		JButton btnAvaliacaoConf = new JButton("avaliar configura\u00E7\u00E3o");
 		btnAvaliacaoConf.setBounds(295, 39, 144, 23);
 		panelManualConf.add(btnAvaliacaoConf);
-		
-		JScrollBar scrollbarManuelConf = new JScrollBar();
-		scrollbarManuelConf.setBounds(273, 39, 17, 75);
-		panelManualConf.add(scrollbarManuelConf);
-		
+
 		JButton btnGravarMconf = new JButton("gravar configura\u00E7\u00E3o");
 		btnGravarMconf.setBounds(298, 91, 141, 23);
 		panelManualConf.add(btnGravarMconf);
+	
+
 		
 		JTextArea mCediting = new JTextArea();
 		mCediting.setBounds(147, 39, 132, 75);
 		panelManualConf.add(mCediting);
 		
+		
+		JScrollBar scrollbarManuelConf = new JScrollBar();
+		scrollbarManuelConf.setBounds(273, 39, 17, 75);
+		panelManualConf.add(scrollbarManuelConf);
+		
+		
+	
 		JTextPane textPane_3 = new JTextPane();
 		textPane_3.setBounds(126, 11, -105, 103);
 		panelManualConf.add(textPane_3);
@@ -225,6 +233,10 @@ public class Interface_Window {
 		JSeparator separator_2 = new JSeparator();
 		separator_2.setBounds(57, 141, 1, 2);
 		panel_2.add(separator_2);
+
+		//Automatic Configuration 				
+		
+		
 		
 		JButton btnGerarConfiguraoAutomatica = new JButton("gerar configura\u00E7\u00E3o automatica");
 		btnGerarConfiguraoAutomatica.setBounds(297, 39, 142, 23);
@@ -271,6 +283,8 @@ public class Interface_Window {
 		    }
 		});
 		
+
+		
 		btnHamSetting.addActionListener( new ActionListener()
 		{
 		    @Override
@@ -287,6 +301,8 @@ public class Interface_Window {
 		        }
 		    }
 		});
+		
+		
 		
 		btnRulesSetting.addActionListener( new ActionListener()
 		{
@@ -306,7 +322,6 @@ public class Interface_Window {
 		        	for(Rule rule : rulesList) {
 		        		model.addElement(rule.getRule());
 		        		mCediting.append(rule.getWeight()+"\n");
-		        		
 		        	}
 		        }
 		    }
@@ -316,7 +331,7 @@ public class Interface_Window {
 			@Override
 		    public void actionPerformed(ActionEvent e)
 		    {
-				saveRuleValues(mCediting,pathRulesFinder.getText());
+				//Add here a geracao...
 		    }
 		});
 		
@@ -325,6 +340,23 @@ public class Interface_Window {
 				evaluate();
 			}
 		});
+		
+		
+		btnGerarConfiguraoAutomatica.addActionListener( new ActionListener()
+		{
+		    @Override
+		    public void actionPerformed(ActionEvent e)
+		    {
+
+		    	
+		        }
+		    }
+		);
+		
+		
+		
+		
+		
 	}
 	
 	public static boolean isInteger(String str) {
