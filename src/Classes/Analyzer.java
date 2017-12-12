@@ -64,6 +64,11 @@ public class Analyzer {
 		return fn_counter;
 	}
 	
+	
+	public int evaluateFN(List<Email> emailList, List<Rule> rulesList) {
+		return 1;
+	}
+	
 	/**
 	 * Calcula o FP em percentagem
 	 * 
