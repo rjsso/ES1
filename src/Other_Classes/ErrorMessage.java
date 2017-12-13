@@ -14,7 +14,7 @@ import javax.swing.SwingConstants;
 /**
  * Esta classe tem como objetivo idicar um erro no correr d
  * 
- * @author Kevin Corrales nº 73529
+ * @author Miguel Rodrigues	 nº 73541
  *
  */
 
@@ -25,9 +25,9 @@ public class ErrorMessage extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public void errorMessage() {
+	public void errorMessage(String error) {
 		try {
-			ErrorMessage dialog = new ErrorMessage();
+			ErrorMessage dialog = new ErrorMessage(error);
 			dialog.setTitle("Files not Found");
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
@@ -39,7 +39,7 @@ public class ErrorMessage extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ErrorMessage() {
+	public ErrorMessage(String message) {
 		
 		setBounds(100, 100, 294, 158);
 		getContentPane().setLayout(new BorderLayout());
@@ -47,7 +47,8 @@ public class ErrorMessage extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
-			JLabel lblAddAllFiles = new JLabel("Add all Files to their respective Path files first");
+			//"Add all Files to their respective Path files first"
+			JLabel lblAddAllFiles = new JLabel(message);
 			lblAddAllFiles.setHorizontalAlignment(SwingConstants.CENTER);
 			contentPanel.add(lblAddAllFiles);
 		}
