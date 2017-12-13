@@ -52,9 +52,9 @@ public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 	  		 */
 	    System.out.println("its in");
 
-	    List<Rule> ruleList = reader.getRulesFromFile("../rules.cf",x);
+	    List<Rule> ruleList = reader.getRulesFromFile(Interface_Window.RulePath,x);
 	    
-	    solution.setObjective(0,  analyser.getFPcount(reader.getEmailsFromFile("../spam.log"), ruleList));
-	    solution.setObjective(1, analyser.getFNcount(reader.getEmailsFromFile("../ham.log"), ruleList));
+	    solution.setObjective(0,  analyser.getFPcount(reader.getEmailsFromFile(Interface_Window.SpamPath), ruleList));
+	    solution.setObjective(1, analyser.getFNcount(reader.getEmailsFromFile(Interface_Window.HamPath), ruleList));
 	  }
 	}

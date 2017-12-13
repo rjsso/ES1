@@ -2,31 +2,13 @@ package antiSpamFilter;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.Component;
-import javax.swing.Box;
-import javax.swing.DefaultListModel;
-
-import java.awt.BorderLayout;
-import javax.swing.JTextPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.plaf.synth.SynthSeparatorUI;
+import javax.swing.*;
 
 import Classes.Analyzer;
 import Classes.Email;
 import Classes.FileReader;
 import Classes.Rule;
 import Other_Classes.ErrorMessage;
-//import Other_Classes.Warning;
-
-import javax.swing.JLabel;
-import javax.swing.JScrollBar;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JSeparator;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -39,13 +21,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.JList;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import java.awt.Color;
-import javax.swing.ListModel;
-import javax.swing.JScrollPane;
-import java.awt.GridLayout;
 import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.GridBagConstraints;
 
 /**
  * Esta classe tem como objetivo de apresentar um interface simples e limpo para a realizacao de 
@@ -55,27 +36,30 @@ import java.awt.Insets;
  */
 
 public class Interface_Window {
-	
-	JLabel lblFpMC = new JLabel("FP:");
-	JLabel lblFnMc = new JLabel("FN:");
-	JLabel lblfppercent = new JLabel("%FP:");
-	JLabel lblfnpercent = new JLabel("%FN:");
-	JLabel lblautofn = new JLabel("FN:");
-	JLabel lblautofp = new JLabel("FP:");
-	JLabel lblautofnpercent = new JLabel("%FN:");
-	JLabel lblautofppercent = new JLabel("%FP:");
-	
+
+	JLabel lblFpMC = new JLabel("FP:");                 //Label Fp Manual
+	JLabel lblFnMc = new JLabel("FN:");				    //Label Fn Manual
+	JLabel lblfppercent = new JLabel("%FP:");			//Label Percentagem Fp Manual
+	JLabel lblfnpercent = new JLabel("%FN:");			//Label Percentagem Fn Manual
+	JLabel lblautofn = new JLabel("FN:");				//Label Fn Automatico
+	JLabel lblautofp = new JLabel("FP:");				//Label Fp Automatico
+	JLabel lblautofnpercent = new JLabel("%FN:");		//Label Percentagem Fn automatico
+	JLabel lblautofppercent = new JLabel("%FP:");		//Label Percentagem Fp automatico
+		
+	public static String RulePath;						//Path of selected Rules
+	public static String SpamPath;						//Path of selected Spam
+	public static String HamPath;						//Path of selected Ham
 	private JFrame frame;
+	
+	private AntiSpamFilterAutomaticConfiguration filterConfiguration = new AntiSpamFilterAutomaticConfiguration(); 
 	private List<Rule> rulesList;
 	private List<Email> hamList;
 	private List<Email> spamList;
-	private int fp=0; //por atributo textfield ou label
-	private int fn=0;
 	boolean isGenerated;
-	//adicionar tambem a percentagem
 
 	/**
 	 * Launch the application.
+	 *
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -98,7 +82,10 @@ public class Interface_Window {
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Initializar as Interface, construir o ui e correr o sistema. 
+	 * 
+	 * @author Miguel Rodrigues @73541
+	 * @author (Parial) Kevin Corrales nº 73529
 	 */
 	private void initialize() {
 		
@@ -116,6 +103,7 @@ public class Interface_Window {
 		panelPaths.setBounds(10, 11, 449, 149);
 		frame.getContentPane().add(panelPaths);
 		panelPaths.setLayout(null);
+		
 		
 		JTextPane pathRulesFinder = new JTextPane();
 		pathRulesFinder.setEditable(false);
@@ -310,7 +298,6 @@ public class Interface_Window {
 		lblautofp.setBounds(77, 118, 46, 14);
 		panel_2.add(lblautofp);
 		
-
 		lblautofn.setForeground(Color.GREEN);
 		lblautofn.setBounds(10, 118, 46, 14);
 		panel_2.add(lblautofn);
@@ -343,6 +330,7 @@ public class Interface_Window {
 		        if(returnVal == JFileChooser.APPROVE_OPTION) {
 		        	pathSpamFinder.setText(chooser.getSelectedFile().getPath());
 		        	spamList = reader.getEmailsFromFile(chooser.getSelectedFile().getPath());
+		        	SpamPath=chooser.getSelectedFile().getPath();
 		        }
 		    }
 		});
@@ -362,6 +350,7 @@ public class Interface_Window {
 		        if(returnVal == JFileChooser.APPROVE_OPTION) {
 		        	pathHamFinder.setText(chooser.getSelectedFile().getPath());
 		        	hamList = reader.getEmailsFromFile(chooser.getSelectedFile().getPath());
+		        	HamPath=chooser.getSelectedFile().getPath();
 		        }
 		    }
 		});
@@ -382,6 +371,7 @@ public class Interface_Window {
 		        	pathRulesFinder.setText(chooser.getSelectedFile().getPath());
 		        	rulesList = reader.getRulesFromFile(chooser.getSelectedFile().getPath());
 		        	mCediting.setText("");
+		        	RulePath=chooser.getSelectedFile().getPath();
 		        	
 		        	
 		        	for(Rule rule : rulesList) {
@@ -415,8 +405,15 @@ public class Interface_Window {
 		    public void actionPerformed(ActionEvent e)
 		    {
 		    	
+		    	JOptionPane.showMessageDialog(null, "This operation may takea while so, grab a cup of cooffe my dear");
+		    	try {
+					filterConfiguration.runJmetal();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		    	double[] geracao= reader.getDoubleVector("experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.NSGAII.rs");
-		    	for(int i=0;i<geracao.length;i++) {
+		    	for(int i=0;i<geracao.length ||i< rulesList.size() ;i++) {
 		    		doublemodel.addElement(geracao[i]);
 		    		rulesList.get(i).setWeight(geracao[i]);
 		    	}
