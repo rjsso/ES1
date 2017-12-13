@@ -30,9 +30,9 @@ public class FileReader {
 				while(scanner.hasNextLine()){
 					String line = scanner.nextLine();
 					List<String> splitLine = Arrays.asList(line.split(" "));
-					int weight=0;
+					double weight=0;
 					if(splitLine.size()>1)
-						weight = Integer.parseInt(splitLine.get(1));
+						weight = Double.parseDouble(splitLine.get(1));
 					rulesList.add(new Rule(splitLine.get(0),weight));
 				}
 				
