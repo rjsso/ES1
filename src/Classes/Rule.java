@@ -30,8 +30,8 @@ public class Rule {
 	public double getWeight() {
 		return weight;
 	}
-	public void setWeight(int weight) {
-		this.weight = weight;
+	public void setWeight(double d) {
+		this.weight = d;
 	}
 	
 	
