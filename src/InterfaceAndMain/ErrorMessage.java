@@ -1,4 +1,4 @@
-package Other_Classes;
+package InterfaceAndMain;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;

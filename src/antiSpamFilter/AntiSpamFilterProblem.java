@@ -9,6 +9,7 @@ import org.uma.jmetal.solution.DoubleSolution;
 import Classes.Analyzer;
 import Classes.FileReader;
 import Classes.Rule;
+import InterfaceAndMain.Interface_Window;
 
 public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 	

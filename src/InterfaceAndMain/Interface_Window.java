@@ -1,6 +1,4 @@
-package antiSpamFilter;
-
-import java.awt.EventQueue;
+package InterfaceAndMain;
 
 import javax.swing.*;
 
@@ -8,7 +6,7 @@ import Classes.Analyzer;
 import Classes.Email;
 import Classes.FileReader;
 import Classes.Rule;
-import Other_Classes.ErrorMessage;
+import antiSpamFilter.AntiSpamFilterAutomaticConfiguration;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -29,26 +27,26 @@ import java.awt.Insets;
 import java.awt.GridBagConstraints;
 
 /**
- * Esta classe tem como objetivo de apresentar um interface simples e limpo para a realizacao de 
- * todas as accoes desejadas.
+ * Esta classe tem como objetivo de apresentar um interface simples e limpo para a realização de 
+ * todas as acções desejadas.
  *  
  * @author Miguel Rodrigues nº 73541
  */
 
 public class Interface_Window {
 
-	JLabel lblFpMC = new JLabel("FP:");                 //Label Fp Manual
-	JLabel lblFnMc = new JLabel("FN:");				    //Label Fn Manual
-	JLabel lblfppercent = new JLabel("%FP:");			//Label Percentagem Fp Manual
-	JLabel lblfnpercent = new JLabel("%FN:");			//Label Percentagem Fn Manual
-	JLabel lblautofn = new JLabel("FN:");				//Label Fn Automatico
-	JLabel lblautofp = new JLabel("FP:");				//Label Fp Automatico
-	JLabel lblautofnpercent = new JLabel("%FN:");		//Label Percentagem Fn automatico
-	JLabel lblautofppercent = new JLabel("%FP:");		//Label Percentagem Fp automatico
+	JLabel lblFpMC = new JLabel("FP:");                 //Label FP Manual
+	JLabel lblFnMc = new JLabel("FN:");				    //Label FN Manual
+	JLabel lblfppercent = new JLabel("FP%:");			//Label Percentagem FP Manual
+	JLabel lblfnpercent = new JLabel("FN%:");			//Label Percentagem FN Manual
+	JLabel lblautofn = new JLabel("FN:");				//Label FN Automatico
+	JLabel lblautofp = new JLabel("FP:");				//Label FP Automatico
+	JLabel lblautofnpercent = new JLabel("FN%:");		//Label Percentagem FN automático
+	JLabel lblautofppercent = new JLabel("FP%:");		//Label Percentagem FP automático
 		
-	public static String RulePath;						//Path of selected Rules
-	public static String SpamPath;						//Path of selected Spam
-	public static String HamPath;						//Path of selected Ham
+	public static String RulePath;						//Path do ficheiro Rules
+	public static String SpamPath;						//Path do ficheiro Spam
+	public static String HamPath;						//Path do ficheiro Ham
 	private JFrame frame;
 	
 	private AntiSpamFilterAutomaticConfiguration filterConfiguration = new AntiSpamFilterAutomaticConfiguration(); 
@@ -57,35 +55,22 @@ public class Interface_Window {
 	private List<Email> spamList;
 	boolean isGenerated;
 
-	/**
-	 * Launch the application.
-	 *
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Interface_Window window = new Interface_Window();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
-	 * Create the application.
+	 * Construtor da classe.
+	 * Inicializa a interface.
 	 */
 	public Interface_Window() {
 		initialize();
+		frame.setVisible(true);
 	}
 
 	/**
-	 * Initializar as Interface, construir o ui e correr o sistema. 
+	 * Inicializar as Interface, construir o ui e correr o sistema. 
 	 * 
 	 * @author Miguel Rodrigues @73541
-	 * @author (Parial) Kevin Corrales nº 73529
+	 * @author (Parcial) Kevin Corrales nº 73529
 	 */
 	private void initialize() {
 		
@@ -311,9 +296,7 @@ public class Interface_Window {
 		lblautofppercent.setForeground(Color.RED);
 		lblautofppercent.setBounds(142, 118, 54, 14);
 		panel_2.add(lblautofppercent);
-			//Kevin
-
-		//Kevin
+			
 		
 		FileReader reader = new FileReader();
 		
@@ -405,7 +388,7 @@ public class Interface_Window {
 		    public void actionPerformed(ActionEvent e)
 		    {
 		    	
-		    	JOptionPane.showMessageDialog(null, "This operation may takea while so, grab a cup of cooffe my dear");
+		    	JOptionPane.showMessageDialog(null, "This operation may take a while so, grab a cup of coffee my dear");
 		    	try {
 					filterConfiguration.runJmetal();
 				} catch (IOException e1) {
@@ -441,8 +424,8 @@ public class Interface_Window {
 					saveRuleValues(rulesValues,pathRulesFinder.getText());
 				}
 				else{
-					ErrorMessage error= new ErrorMessage("Hasnt been generated yet");
-					error.errorMessage("Hasnt been generated yet");
+					ErrorMessage error= new ErrorMessage("Has not been generated yet");
+					error.errorMessage("Has not been generated yet");
 				}
 			}
 		});
