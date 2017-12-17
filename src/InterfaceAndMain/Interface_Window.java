@@ -148,11 +148,11 @@ public class Interface_Window {
 		lblFnMc.setBounds(10, 118, 80, 14);
 		panelManualConf.add(lblFnMc);
 		
-		JButton btnAvaliacaoConf = new JButton("evaluate configuration\u00E7\u00E3o");
+		JButton btnAvaliacaoConf = new JButton("Evaluate Configuration");
 		btnAvaliacaoConf.setBounds(295, 39, 144, 23);
 		panelManualConf.add(btnAvaliacaoConf);
 		
-		JButton btnGravarMconf = new JButton("save configuration\u00E7\u00E3o");
+		JButton btnGravarMconf = new JButton("Save Configuration");
 		btnGravarMconf.setBounds(298, 91, 141, 23);
 		panelManualConf.add(btnGravarMconf);
 		
@@ -265,12 +265,12 @@ public class Interface_Window {
 		separator_2.setBounds(57, 141, 1, 2);
 		panel_2.add(separator_2);
 		
-		JButton btnGerarConfiguraoAutomatica = new JButton("generate configuration\u00E7\u00E3o automatica");
-		btnGerarConfiguraoAutomatica.setBounds(297, 39, 142, 23);
+		JButton btnGerarConfiguraoAutomatica = new JButton("Generate Configuration");
+		btnGerarConfiguraoAutomatica.setBounds(289, 32, 150, 23);
 		panel_2.add(btnGerarConfiguraoAutomatica);
 		
-		JButton btnGravarAutConf = new JButton("save configuration\u00E7ao");
-		btnGravarAutConf.setBounds(297, 91, 142, 23);
+		JButton btnGravarAutConf = new JButton("Save Configuration");
+		btnGravarAutConf.setBounds(289, 91, 150, 23);
 		panel_2.add(btnGravarAutConf);
 		
 		JLabel lblAutomaticConfiguration = new JLabel("Automatic Configuration");
@@ -296,6 +296,10 @@ public class Interface_Window {
 		lblautofppercent.setForeground(Color.RED);
 		lblautofppercent.setBounds(142, 118, 54, 14);
 		panel_2.add(lblautofppercent);
+		
+		JButton btnActEval = new JButton("Actualize and Evaluate");
+		btnActEval.setBounds(289, 62, 150, 23);
+		panel_2.add(btnActEval);
 			
 		
 		FileReader reader = new FileReader();
@@ -395,6 +399,16 @@ public class Interface_Window {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+		    	JOptionPane.showMessageDialog(null, "Completed!");
+		        }
+		    }
+		);
+		
+		btnActEval.addActionListener( new ActionListener()
+		{
+		    @Override
+		    public void actionPerformed(ActionEvent e)
+		    {
 		    	double[] geracao= reader.getDoubleVector("experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.NSGAII.rs");
 		    	for(int i=0;i<geracao.length ||i< rulesList.size() ;i++) {
 		    		doublemodel.addElement(geracao[i]);
@@ -407,7 +421,6 @@ public class Interface_Window {
 		        }
 		    }
 		);
-		
 		
 		btnGravarAutConf.addActionListener( new ActionListener() {
 			@Override
