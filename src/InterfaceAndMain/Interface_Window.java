@@ -278,7 +278,7 @@ public class Interface_Window {
 		lblAutomaticConfiguration.setBounds(109, 11, 181, 14);
 		panel_2.add(lblAutomaticConfiguration);
 		
-		//Lables de resultados de avaliação de FP e FN
+		//Labels de resultados de avaliação de FP e FN
 		lblautofp.setForeground(Color.RED);
 		lblautofp.setBounds(77, 118, 46, 14);
 		panel_2.add(lblautofp);
@@ -287,7 +287,7 @@ public class Interface_Window {
 		lblautofn.setBounds(10, 118, 46, 14);
 		panel_2.add(lblautofn);
 		
-		//labels que dao valores em percentage de FP e FN apos avaliacao
+		//labels que dão valores em percentagem de FP e FN após avaliação
 		lblautofnpercent.setForeground(Color.GREEN);
 		lblautofnpercent.setBounds(237, 118, 54, 14);
 		panel_2.add(lblautofnpercent);
@@ -304,7 +304,7 @@ public class Interface_Window {
 		
 		FileReader reader = new FileReader();
 		
-		//Butao para seletionar localizacao de Spam File
+		//Botão para selecionar localização do ficheiro Spam 
 		btnSpamSetting.addActionListener( new ActionListener()
 		{
 		    @Override
@@ -324,7 +324,7 @@ public class Interface_Window {
 		});
 		
 
-		//Selectionador de ficheiro Ham
+		//Selecionador do ficheiro Ham
 		btnHamSetting.addActionListener( new ActionListener()
 		{
 		    @Override
@@ -344,7 +344,7 @@ public class Interface_Window {
 		});
 		
 		
-		//Seletionador de Ficheiro Rules
+		//Selecionador do ficheiro Rules
 		btnRulesSetting.addActionListener( new ActionListener()
 		{
 		    @Override
@@ -370,7 +370,7 @@ public class Interface_Window {
 		    }
 		});
 		
-		//Butão de Gravacao de Configuracao Manual
+		//Botão de Gravação de Configuração manual
 		btnGravarMconf.addActionListener( new ActionListener() {
 			@Override
 		    public void actionPerformed(ActionEvent e)
@@ -382,14 +382,14 @@ public class Interface_Window {
 		});
 		
 		
-		//Butao de avaliação na Configuração Manual
+		//Botão de avaliação na configuração manual
 		btnAvaliacaoConf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				evaluateManual();
 			}
 		});
 	
-		//Butao que corre o Jmetal e Gera os valores para a Configuracao automatica
+		//Botão que inicia o Jmetal e gera os valores para a configuração automática
 		btnGerarConfiguraoAutomatica.addActionListener( new ActionListener()
 		   {@Override
 		    public void actionPerformed(ActionEvent e)
@@ -399,7 +399,6 @@ public class Interface_Window {
 		    	try {
 					filterConfiguration.runJmetal();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 		    	JOptionPane.showMessageDialog(null, "Completed!");
@@ -407,7 +406,7 @@ public class Interface_Window {
 		    }
 		);
 		
-		//Butão de Actualização e Avaliação
+		//Botão de atualização e avaliação
 		btnActEval.addActionListener( new ActionListener()
 		{
 		    @Override
@@ -426,7 +425,7 @@ public class Interface_Window {
 		    }
 		);
 		
-		//Gravar Todos os valores gerados na Conf. automatica
+		//Gravar todos os valores gerados na configuração automática
 		btnGravarAutConf.addActionListener( new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e)
@@ -452,7 +451,14 @@ public class Interface_Window {
 		
 	}
 	
-	//Funcao de confiramacao de Double
+	/**
+	 * Função de verificação se a string é um double
+	 * 
+	 * @param str
+	 * @return
+	 * 
+	 * @author Kevin Corrales nº 73529
+	 */
 	 public boolean isDouble(String str) {
 	        try {
 	            Double.parseDouble(str);
@@ -464,12 +470,13 @@ public class Interface_Window {
 	
 	 
 	 /**
-	  *  Esta funcao tem como intencao guardar os valores dados atravez de uma Lista de Strings e adicionalo a um ficheiro file
+	  *  Esta função tem como objetivo guardar os valores dados através de uma Lista de strings e gravar num ficheiro
+	  *  
 	  *  @param List<String>
 	  *  @param String
 	  * 
 	  *  
-	  * @author Miguel Rodrigues nº 73541
+	  * @author Kevin Corrales nº 73529
 	  */
 
 	public void saveRuleValues(List<String> rulesValues,String file) {
@@ -509,15 +516,11 @@ public class Interface_Window {
 		
 	
 	 /**
-	  *  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-	  *  @param List<String>
-	  *  @param String
+	  * Avaliar o FP e FN das listas guardadas e mostrar em labels (sistema manual)
 	  * 
-	  *  
-	  * @author Miguel Rodrigues nº 73541
+	  * @author Kevin Corrales nº 73529
 	  */
 
-	
 	public void evaluateManual() {
 		Analyzer analyzer = new Analyzer() ;
 		if(hamList==null || rulesList==null || spamList==null) {
@@ -528,17 +531,14 @@ public class Interface_Window {
 			lblFpMC.setText("FP: " + String.valueOf(analyzer.getFPcount(spamList, rulesList)));
 			
 			lblfppercent.setText("FP%: " + String.valueOf(analyzer.getFPpercentage(spamList,rulesList) )) ;
-			lblfnpercent.setText("FP%: " + String.valueOf(analyzer.getFNpercentage(hamList,rulesList) )) ;
+			lblfnpercent.setText("FN%: " + String.valueOf(analyzer.getFNpercentage(hamList,rulesList) )) ;
 			
 		}
 	}
 	 /**
-	  *  Exxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-	  *  @param List<String>
-	  *  @param String
-	  * 
+	  *  Avaliar o FP e FN das listas guardadas e mostrar em labels (sistema automático)
 	  *  
-	  * @author Miguel Rodrigues nº 73541
+	  * @author Kevin Corrales nº 73529
 	  */
 
 	public void evaluateAuto() {
@@ -551,7 +551,7 @@ public class Interface_Window {
 			lblautofn.setText("FN: " + String.valueOf(analyzer.getFNcount(hamList, rulesList))); 
 			lblautofp.setText("FP: " + String.valueOf(analyzer.getFPcount(spamList, rulesList)));
 			lblautofppercent.setText("FP%: " + String.valueOf(analyzer.getFPpercentage(spamList,rulesList) )) ;
-			lblautofnpercent.setText("FP%: " + String.valueOf(analyzer.getFNpercentage(hamList,rulesList) )) ;
+			lblautofnpercent.setText("FN%: " + String.valueOf(analyzer.getFNpercentage(hamList,rulesList) )) ;
 		}
 	}
 	

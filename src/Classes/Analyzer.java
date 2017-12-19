@@ -25,19 +25,19 @@ public class Analyzer {
 	 */
 	public int getFPcount(List<Email> spamList, List<Rule> rulesList ) {
 		int fp_counter = 0;
-		int inner_count ;
 		for(int x=0; x<spamList.size(); x++) {
-			inner_count=0;
+			int totalWeight = 0;
 			for(int y=0; y<spamList.get(x).getRules().size();y++) {
 				String spamRule = spamList.get(x).getRules().get(y);
 					for(int k=0; k<rulesList.size();k++) {
 						Rule ruleItem = rulesList.get(k);
-							if(ruleItem.getWeight()>=5 && spamRule.equals(ruleItem.getRule())) {
-								inner_count++;
+							if(spamRule.equals(ruleItem.getRule())) {
+								totalWeight+= rulesList.get(k).getWeight();
 							}
 					}
 			}
-			if(inner_count==0)fp_counter++;
+			if(totalWeight<5)
+				fp_counter++;
 		}
 		return fp_counter;
 	}
@@ -55,21 +55,18 @@ public class Analyzer {
 	 */
 	public int getFNcount(List<Email> emailList, List<Rule> rulesList) {
 		int fn_counter = 0;
-		int inner_count ;
 		for(int x=0; x<emailList.size(); x++) {
-			inner_count=0;
+			int totalWeight = 0;
 			for(int y=0; y<emailList.get(x).getRules().size();y++) {
 				String spamRule = emailList.get(x).getRules().get(y);
-					
 					for(int k=0; k<rulesList.size();k++) {
 						Rule ruleItem = rulesList.get(k);
-						if(ruleItem.getWeight()<5 && spamRule.equals(ruleItem.getRule())) {
-							inner_count++;
+						if(spamRule.equals(ruleItem.getRule())) {
+							totalWeight+= rulesList.get(k).getWeight();
 						}
-							
 					}
 			}
-			if(inner_count==0)
+			if(totalWeight>5)
 				fn_counter++;
 		}
 		return fn_counter;
