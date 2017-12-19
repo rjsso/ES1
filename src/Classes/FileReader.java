@@ -123,10 +123,11 @@ public class FileReader {
 		List<String> splitNumbers=null;
 		
 			try{
-				for(int i=0; i<numb;i++){
 				scanner = new Scanner(new File(location));
+				String line = scanner.nextLine();
+				for(int i=0; i<numb-1;i++){
+					line = scanner.nextLine();
 				}
-					String line = scanner.nextLine();
 					splitNumbers = Arrays.asList(line.split(" "));
 				
 					//resulting= new double[splitNumbers.size()];
@@ -144,4 +145,53 @@ public class FileReader {
 		return resulting;
 	}
 
+	
+	
+	/**
+	 * Vai ver qual das linhas representa uma maior aproximação a um email profissional
+	 * @param localização do ficheiro
+	 * @return numero da linhas
+	 * 
+	 * 
+	 * @author Ricardo Santos nº 72973
+	 */
+	/**
+	 * Vai ver qual das linhas representa uma maior aproximação a um email profissional
+	 * @param localização do ficheiro
+	 * @return numero da linhas
+	 * 
+	 * 
+	 * @author Ricardo Santos nº 72973
+	 */
+	public int getLine(String location) {
+		Scanner scanner = null;
+		String[] lines = new String[10];
+		double value=1000.0;
+		int returner=1; 
+		int count=0;
+		double[] vet = new double[10];
+			try{
+				scanner = new Scanner(new File(location));
+				while(scanner.hasNextLine()) {
+					String line = scanner.nextLine();
+					lines[count] = line.split(" ")[1];
+					count ++;
+				}
+			}catch(FileNotFoundException e){
+				e.printStackTrace();
+			}finally{
+				scanner.close();
+			}
+			for (int i=0;i<count;i++) {
+				if(Double.parseDouble(lines[i])<value) {
+					
+					value=Double.parseDouble(lines[i]);
+					returner = i+1;
+				}
+				
+			}
+			return returner;
+	}
+	
+	
 }
