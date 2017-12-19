@@ -112,20 +112,23 @@ public class FileReader {
 /**
  * Converter um ficheiro dado uma localizacao num vetor de doubles
  * @param localização do ficheiro
+ * @param linha lida em ficheiro
  * @return lista de emails ou spams
  * 
  * 
  * @author Miguel Rodrigues nº 73541
  */
-	public double[] getDoubleVector(String location){
+	public double[] getDoubleVector(String location, int numb){
 		Scanner scanner = null;
 		List<String> splitNumbers=null;
 		
 			try{
+				for(int i=0; i<numb;i++){
 				scanner = new Scanner(new File(location));
-				
+				}
 					String line = scanner.nextLine();
 					splitNumbers = Arrays.asList(line.split(" "));
+				
 					//resulting= new double[splitNumbers.size()];
 			}catch(FileNotFoundException e){
 				e.printStackTrace();

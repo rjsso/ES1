@@ -278,7 +278,7 @@ public class Interface_Window {
 		lblAutomaticConfiguration.setBounds(109, 11, 181, 14);
 		panel_2.add(lblAutomaticConfiguration);
 		
-
+		//Lables de resultados de avaliação de FP e FN
 		lblautofp.setForeground(Color.RED);
 		lblautofp.setBounds(77, 118, 46, 14);
 		panel_2.add(lblautofp);
@@ -287,7 +287,7 @@ public class Interface_Window {
 		lblautofn.setBounds(10, 118, 46, 14);
 		panel_2.add(lblautofn);
 		
-
+		//labels que dao valores em percentage de FP e FN apos avaliacao
 		lblautofnpercent.setForeground(Color.GREEN);
 		lblautofnpercent.setBounds(237, 118, 54, 14);
 		panel_2.add(lblautofnpercent);
@@ -304,6 +304,7 @@ public class Interface_Window {
 		
 		FileReader reader = new FileReader();
 		
+		//Butao para seletionar localizacao de Spam File
 		btnSpamSetting.addActionListener( new ActionListener()
 		{
 		    @Override
@@ -323,7 +324,7 @@ public class Interface_Window {
 		});
 		
 
-		
+		//Selectionador de ficheiro Ham
 		btnHamSetting.addActionListener( new ActionListener()
 		{
 		    @Override
@@ -343,7 +344,7 @@ public class Interface_Window {
 		});
 		
 		
-		
+		//Seletionador de Ficheiro Rules
 		btnRulesSetting.addActionListener( new ActionListener()
 		{
 		    @Override
@@ -369,6 +370,7 @@ public class Interface_Window {
 		    }
 		});
 		
+		//Butão de Gravacao de Configuracao Manual
 		btnGravarMconf.addActionListener( new ActionListener() {
 			@Override
 		    public void actionPerformed(ActionEvent e)
@@ -379,16 +381,17 @@ public class Interface_Window {
 		    }
 		});
 		
+		
+		//Butao de avaliação na Configuração Manual
 		btnAvaliacaoConf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				evaluateManual();
 			}
 		});
 	
-		
+		//Butao que corre o Jmetal e Gera os valores para a Configuracao automatica
 		btnGerarConfiguraoAutomatica.addActionListener( new ActionListener()
-		{
-		    @Override
+		   {@Override
 		    public void actionPerformed(ActionEvent e)
 		    {
 		    	
@@ -404,12 +407,13 @@ public class Interface_Window {
 		    }
 		);
 		
+		//Butão de Actualização e Avaliação
 		btnActEval.addActionListener( new ActionListener()
 		{
 		    @Override
 		    public void actionPerformed(ActionEvent e)
 		    {
-		    	double[] geracao= reader.getDoubleVector("experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.NSGAII.rs");
+		    	double[] geracao= reader.getDoubleVector("experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.NSGAII.rs",1);
 		    	for(int i=0;i<geracao.length ||i< rulesList.size() ;i++) {
 		    		doublemodel.addElement(geracao[i]);
 		    		rulesList.get(i).setWeight(geracao[i]);
@@ -422,6 +426,7 @@ public class Interface_Window {
 		    }
 		);
 		
+		//Gravar Todos os valores gerados na Conf. automatica
 		btnGravarAutConf.addActionListener( new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e)
@@ -447,6 +452,7 @@ public class Interface_Window {
 		
 	}
 	
+	//Funcao de confiramacao de Double
 	 public boolean isDouble(String str) {
 	        try {
 	            Double.parseDouble(str);
@@ -456,6 +462,16 @@ public class Interface_Window {
 	        }
 	    }
 	
+	 
+	 /**
+	  *  Esta funcao tem como intencao guardar os valores dados atravez de uma Lista de Strings e adicionalo a um ficheiro file
+	  *  @param List<String>
+	  *  @param String
+	  * 
+	  *  
+	  * @author Miguel Rodrigues nº 73541
+	  */
+
 	public void saveRuleValues(List<String> rulesValues,String file) {
 		
 	    if(!file.isEmpty()) {
@@ -492,7 +508,15 @@ public class Interface_Window {
 	
 		
 	
-	
+	 /**
+	  *  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+	  *  @param List<String>
+	  *  @param String
+	  * 
+	  *  
+	  * @author Miguel Rodrigues nº 73541
+	  */
+
 	
 	public void evaluateManual() {
 		Analyzer analyzer = new Analyzer() ;
@@ -508,7 +532,15 @@ public class Interface_Window {
 			
 		}
 	}
-	
+	 /**
+	  *  Exxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+	  *  @param List<String>
+	  *  @param String
+	  * 
+	  *  
+	  * @author Miguel Rodrigues nº 73541
+	  */
+
 	public void evaluateAuto() {
 		Analyzer analyzer = new Analyzer() ;
 		if(hamList==null || rulesList==null || spamList==null) {
