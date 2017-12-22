@@ -365,6 +365,7 @@ public class Interface_Window {
 		    @Override
 		    public void actionPerformed(ActionEvent e)
 		    {
+		    	doublemodel.clear();
 		    	int aux  = reader.getLine("experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.NSGAII.rf");
 		    	double[] geracao= reader.getDoubleVector("experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.NSGAII.rs",aux);
 		    	for(int i=0;i<geracao.length ||i< rulesList.size() ;i++) {
