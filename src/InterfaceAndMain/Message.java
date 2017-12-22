@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 /**
- * Esta classe tem como objetivo idicar um erro no correr d
+ * Esta classe tem como objetivo indicar um erro no correr do programa
  * 
  * @author Miguel Rodrigues	 nº 73541
  *
@@ -26,7 +26,7 @@ public class Message extends JDialog {
 	
 
 	/**
-	 * Launch the application.
+	 * Lançar a aplicação
 	 */
 	public void sendMessage() {
 		try {
@@ -40,7 +40,7 @@ public class Message extends JDialog {
 	}
 
 	/**
-	 * Create the dialog.
+	 * Criar o Dialog
 	 */
 	
 	public Message(String title,String message) {
