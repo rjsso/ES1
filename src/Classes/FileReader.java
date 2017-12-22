@@ -2,7 +2,12 @@ package Classes;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
+
+import InterfaceAndMain.Message;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -193,5 +198,64 @@ public class FileReader {
 			return returner;
 	}
 	
+	 /**
+	  *  Esta função tem como objetivo guardar os valores dados através de uma Lista de strings e gravar num ficheiro
+	  *  
+	  *  @param List<String>
+	  *  @param String
+	  * 
+	  *  
+	  * @author Kevin Corrales nº 73529
+	  */
+
+	public void saveRuleValues(List<String> rulesValues,String file,List<Rule> rulesList) {
+		
+	    if(!file.isEmpty()) {
+	    	PrintWriter writer ;
+			try {
+				writer = new PrintWriter(file, "UTF-8");
+					for(int i=0; i<rulesList.size();i++) {
+						if(i<rulesValues.size() && rulesValues.size()>0) {
+							if(isDouble(rulesValues.get(i))) {
+								writer.println(rulesList.get(i).getRule() + " " + rulesValues.get(i));
+								rulesList.get(i).setWeight(Double.parseDouble(rulesValues.get(i)));
+							}else {
+								writer.println(rulesList.get(i).getRule() + " " + 0);
+								rulesList.get(i).setWeight(0);
+					    	
+							}
+						}else {
+							writer.println(rulesList.get(i).getRule() + " " + 0);
+						}
+					}
+			    writer.close();
+			} catch (FileNotFoundException e) {
+				Message error = new Message("Files not found","Files not Found");
+		    	error.sendMessage();
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+	    }else {
+	    	Message error = new Message("Add all Files","Add all Files to their respective Path files first");
+			error.sendMessage();
+	    }
+	}
 	
+	/**
+	 * Função de verificação se a string é um double
+	 * 
+	 * @param str
+	 * @return
+	 * 
+	 * @author Kevin Corrales nº 73529
+	 */
+	 public boolean isDouble(String str) {
+	        try {
+	            Double.parseDouble(str);
+	            return true;
+	        } catch (NumberFormatException e) {
+	            return false;
+	        }
+	    }
 }
