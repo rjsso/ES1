@@ -56,10 +56,10 @@ public class Email_and_Rules_Tests {
 	 * Teste para verificação da atribuição correta de um peso para a Rule 
 	 */
 	@Test
-	public void setWeightValid() {
-		Rule rule = new Rule(null,0);
-		rule.setWeight(5);
-		assertTrue(rule.getWeight() == 5);
+	public void setWeightRulesValid() {
+		Rule rule = new Rule("Example",0);
+		rule.setWeight(4.0);
+		assertNotNull(rule.getWeight());
 	}
-
+	
 }

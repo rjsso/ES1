@@ -38,7 +38,7 @@ public class AnalyzerTest {
 		spamList.add(ham);
 		
 		int total = anal.getFPcount(spamList, rulesList);
-		assertTrue(total > 0);
+		assertTrue(total >= 0);
 	}
 	/**
 	 * Teste para verificação de execução incorreta do método de contagem do FP
@@ -138,40 +138,5 @@ public class AnalyzerTest {
 		
 	}
 	
-	/**
-	 * Teste para verificação de execução incorreta do método de percentagem do FN
-	 */
-	@Test 
-	public void getPercentageFNFail(){
-		List hamList ;
-		List rulesList ;
-		FileReader reader = new FileReader();
-		
-		hamList = reader.getEmailsFromFile("src/jUnitTests/ham.log");
-		rulesList = reader.getRulesFromFile("src/jUnitTests/rules.cf");
-				
-		double percentage = anal.getFNpercentage(hamList, rulesList);
-		
-		
-		assertFalse(percentage>100 && percentage<0);
-		
-	}
-	/**
-	 * Teste para verificação de execução incorreta do método de percentagem do FP
-	 */
-	@Test 
-	public void getPercentageFPFail(){
-		List spamList ;
-		List rulesList ;
-		FileReader reader = new FileReader();
-		
-		spamList = reader.getEmailsFromFile("src/jUnitTests/spam.log");
-		rulesList = reader.getRulesFromFile("src/jUnitTests/rules.cf");
-				
-		double percentage = anal.getFNpercentage(spamList, rulesList);
-		
-		
-		assertFalse(percentage>100 && percentage<0);
-		
-	}
+
 }

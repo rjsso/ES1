@@ -18,24 +18,54 @@ import antiSpamFilter.AntiSpamFilterProblem;
 public class FileReaderTest {
 
 	private FileReader reader = new FileReader();
+	private int line = 0;
+	
 	/**
 	 * Teste para verificação da criação correta de uma lista de Rules 
 	 */
 	@Test
 	public void createRulesList() {
 		List rulesList = reader.getRulesFromFile("src/jUnitTests/rules.cf");
-		assertTrue(rulesList!=null);
+		assertNotNull(rulesList);
 	}
+	
+	/**
+	 * Teste para verificação da criação correta de uma lista de Rules 
+	 */
+	@Test
+	public void createRulesList2Param() {
+		double vp[] = new double[335];
+		List rulesList = reader.getRulesFromFile("src/jUnitTests/rules.cf",vp);
+		assertNotNull(rulesList);
+	}
+	
 	/**
 	 * Teste para verificação da criação correta de uma lista de Emails 
 	 */	
 	@Test
 	public void createMailList(){
 		List mailList = reader.getEmailsFromFile("src/jUnitTests/ham.log");
-		assertTrue(mailList!=null);
+		assertNotNull(mailList);
 	}
 	
-	// FileReader ver exception
+	/**
+	 * Teste para verificar qual das linhas representa uma maior aproximação a um email profissional
+	 */
 	
+	@Test
+	public void getLineTest() {
+		line = reader.getLine("experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.NSGAII.rf");
+		assertTrue(line!=0);
+	}
+	/**
+	 * Teste para verificação da conversão correta de um ficheiro dado uma localizacao num vetor de doubles
+	 */
+	
+	@Test
+	public void getDoubleVectorTest() {
+		double[] a  = reader.getDoubleVector("experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.NSGAII.rf",line);
+		assertNotNull(a);
+	}
+
 
 }
