@@ -229,6 +229,9 @@ public class FileReader {
 						}
 					}
 			    writer.close();
+			    
+			    Message msg = new Message("Files saved","File rules saved");
+			    msg.sendMessage();
 			} catch (FileNotFoundException e) {
 				Message error = new Message("Files not found","Files not Found");
 		    	error.sendMessage();

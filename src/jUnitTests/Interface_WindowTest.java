@@ -1,23 +1,12 @@
 package jUnitTests;
 
-import static org.junit.Assert.*;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JTextArea;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.junit.Test;
 
-import Classes.Analyzer;
 import Classes.Email;
 import Classes.Rule;
 import InterfaceAndMain.Main;
@@ -31,14 +20,6 @@ public class Interface_WindowTest {
 	
 	InterfaceAndMain.Interface_Window i = new InterfaceAndMain.Interface_Window();
 	
-	/**
-	 * Teste para verificação a correta de um número double
-	 */
-	
-	@Test
-	public void isDoubleValid() {
-		assertTrue(i.isDouble("0.1"));
-	}
 	
 	/**
 	 * Teste para verificação da avaliação automática correta

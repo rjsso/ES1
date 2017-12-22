@@ -66,6 +66,16 @@ public class FileReaderTest {
 		double[] a  = reader.getDoubleVector("experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.NSGAII.rf",line);
 		assertNotNull(a);
 	}
+	
+	/**
+	 * Teste para verificação a correta de um número double
+	 */
+	
+	@Test
+	public void isDoubleValid() {
+		FileReader reader = new FileReader();
+		assertTrue(reader.isDouble("0.1"));
+	}
 
 
 }
