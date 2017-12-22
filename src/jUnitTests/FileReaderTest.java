@@ -58,7 +58,7 @@ public class FileReaderTest {
 		assertTrue(line!=0);
 	}
 	/**
-	 * Teste para verificação da conversão correta de um ficheiro dado uma localizacao num vetor de doubles
+	 * Teste para verificação da conversão correta de um ficheiro dado uma localização num vetor de doubles
 	 */
 	
 	@Test

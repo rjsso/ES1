@@ -14,7 +14,7 @@ import Classes.FileReader;
 import Classes.Rule;
 
 /**
- * Esta classe tem como objetivo testar em JUnit os métodos que existem na classe Analyser
+ * Esta classe tem como objetivo testar em JUnit os métodos que existem na classe Analyzer
  *  
  * @author Diana Lopes nº 72898
  */
