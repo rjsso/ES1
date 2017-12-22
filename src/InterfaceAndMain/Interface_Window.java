@@ -442,8 +442,8 @@ public class Interface_Window {
 					saveRuleValues(rulesValues,pathRulesFinder.getText());
 				}
 				else{
-					ErrorMessage error= new ErrorMessage("Has not been generated yet");
-					error.errorMessage("Has not been generated yet");
+					Message error= new Message("Not generated","Has not been generated yet");
+					error.sendMessage();
 				}
 			}
 		});
@@ -502,15 +502,15 @@ public class Interface_Window {
 					}
 			    writer.close();
 			} catch (FileNotFoundException e) {
-				ErrorMessage error = new ErrorMessage("Files not Found");
-		    	error.errorMessage("Files not Found");
+				Message error = new Message("Files not found","Files not Found");
+		    	error.sendMessage();
 				e.printStackTrace();
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
 	    }else {
-	    	ErrorMessage error = new ErrorMessage("Add all Files to their respective Path files first");
-			error.errorMessage("Add all Files to their respective Path files first");
+	    	Message error = new Message("Add all Files","Add all Files to their respective Path files first");
+			error.sendMessage();
 	    }
 	}
 	
@@ -525,8 +525,8 @@ public class Interface_Window {
 	public void evaluateManual() {
 		Analyzer analyzer = new Analyzer() ;
 		if(hamList==null || rulesList==null || spamList==null) {
-			ErrorMessage error = new ErrorMessage("Add all Files to their respective Path files first");
-			error.errorMessage("Add all Files to their respective Path files first");
+			Message error = new Message("Add all Files","Add all Files to their respective Path files first");
+			error.sendMessage();
 		}else {
 			lblFnMc.setText("FN: " + String.valueOf(analyzer.getFNcount(hamList, rulesList))); 
 			lblFpMC.setText("FP: " + String.valueOf(analyzer.getFPcount(spamList, rulesList)));
@@ -545,8 +545,8 @@ public class Interface_Window {
 	public void evaluateAuto() {
 		Analyzer analyzer = new Analyzer() ;
 		if(hamList==null || rulesList==null || spamList==null) {
-			ErrorMessage error = new ErrorMessage("Add all Files to their respective Path files first");
-			error.errorMessage("Add all Files to their respective Path files first");
+			Message error = new Message("Add all Files","Add all Files to their respective Path files first");
+			error.sendMessage();
 		}else {
 			
 			lblautofn.setText("FN: " + String.valueOf(analyzer.getFNcount(hamList, rulesList))); 

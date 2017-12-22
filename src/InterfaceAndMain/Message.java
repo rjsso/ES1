@@ -18,17 +18,20 @@ import javax.swing.SwingConstants;
  *
  */
 
-public class ErrorMessage extends JDialog {
+public class Message extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	private String message;
+	private String title;
+	
 
 	/**
 	 * Launch the application.
 	 */
-	public void errorMessage(String error) {
+	public void sendMessage() {
 		try {
-			ErrorMessage dialog = new ErrorMessage(error);
-			dialog.setTitle("Files not Found");
+			Message dialog = new Message(title,message);
+			dialog.setTitle(title);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -39,8 +42,10 @@ public class ErrorMessage extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ErrorMessage(String message) {
-		
+	
+	public Message(String title,String message) {
+		this.message = message;
+		this.title = title;
 		setBounds(100, 100, 294, 158);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
