@@ -223,7 +223,6 @@ public class Interface_Window {
 		panel_2.add(lblAutomaticConfiguration);
 		
 		//Labels de resultados de avaliação de FP e FN
-		    	
 		lblautofp.setBounds(30, 118, 46, 14);
 		panel_2.add(lblautofp);
 		
@@ -231,7 +230,6 @@ public class Interface_Window {
 		panel_2.add(lblautofn);
 				
 		//labels que dão valores em percentagem de FP e FN após avaliação
-		
 		lblautofppercent.setBounds(280, 118, 54, 14);
 		panel_2.add(lblautofppercent);
 	
