@@ -1,9 +1,14 @@
-Identifica√ß√£o da turma (ex: EIC1)
+IdentificaÁ„o da turma : EIC1
 
-Identifica√ß√£o do grupo (ex: Grupo 2)
+IdentificaÁ„o do grupo : 22
 
-Identifica√ß√£o do n√∫mero, nome e papel de cada membro do grupo (ex: 12345, Jos√© Silva, Scrum Master)
+IdentificaÁ„o do n˙mero, nome e papel de cada membro do grupo :
 
-Identifica√ß√£o da variante do projeto desenvolvida (ex: AntiSpamConfigurationForProfessionalMailbox)
+Ricardo Santos 72973 Scrum Master
+Diana Lopes 72898 Quality Manager
+Kevin Corrales 73529 Developer
+Miguel Rodrigues 73541 Developer
 
-Link para um v√≠deo no youtube com a demonstra√ß√£o da aplica√ß√£o final desenvolvida (ex: http://...)
+AntiSpamConfigurationForProfessionalMailbox
+
+Link para um vÌdeo no youtube com a demonstraÁ„o da aplicaÁ„o final desenvolvida (ex: http://...)

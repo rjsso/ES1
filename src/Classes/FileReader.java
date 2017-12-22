@@ -160,14 +160,7 @@ public class FileReader {
 	 * 
 	 * @author Ricardo Santos nº 72973
 	 */
-	/**
-	 * Vai ver qual das linhas representa uma maior aproximação a um email profissional
-	 * @param localização do ficheiro
-	 * @return numero da linhas
-	 * 
-	 * 
-	 * @author Ricardo Santos nº 72973
-	 */
+	
 	public int getLine(String location) {
 		Scanner scanner = null;
 		String[] lines = new String[10];
@@ -179,7 +172,7 @@ public class FileReader {
 				scanner = new Scanner(new File(location));
 				while(scanner.hasNextLine()) {
 					String line = scanner.nextLine();
-					lines[count] = line.split(" ")[1];
+					lines[count] = line.split(" ")[0];
 					count ++;
 				}
 			}catch(FileNotFoundException e){
