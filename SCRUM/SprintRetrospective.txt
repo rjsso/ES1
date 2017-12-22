@@ -1,0 +1,20 @@
+Sprint Retrospective (05-11-17 , 20-11-17):
+
+Neste Sprint retrospective concluiu-se que o Miguel ficar encarregue da interface 
+e o Kevin do código lógico de backend, era uma boa divisão que explorava os pontos fortes de ambos.
+Além disso, a Diana fez um bom trabalho nos testes.
+
+
+Sprint Retrospective (02-12-17 , 22-12-17):
+
+Houve problemas de integração de código desenvolvido por diferentes pessoas,
+devido ao facto de muito do código feito necessitar de uma carga forte de refactoring o 
+que levou a discussões internas, que podiam ter sido lidadas de outra forma.
+
+Membros do grupo não tiraram dúvidas que podiam ter sido facilmente esclarecidas, 
+o que levou a tempo perdido. 
+(Pedir a cada membro para explicar o que estão a fazer para garantir compreensão mútua
+ do requerimento)
+
+A utilização do github provou-se bastante útil na organização do código de cada membro
+ facilitando em muito a integração desse mesmo código.
