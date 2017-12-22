@@ -12,3 +12,5 @@ Miguel Rodrigues 73541 Developer
 AntiSpamConfigurationForProfessionalMailbox
 
 Link para um vídeo no youtube com a demonstração da aplicação final desenvolvida (ex: http://...)
+
+A gravação das regras automáticas não funciona em runnable jar, mas funciona em Eclipse. Supomos que seja devido ao path.

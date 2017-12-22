@@ -2,6 +2,7 @@ package Classes;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
@@ -202,6 +203,15 @@ public class FileReader {
 	  */
 
 	public void saveRuleValues(List<String> rulesValues,String file,List<Rule> rulesList) {
+		File filePath = new File(file);
+		
+		if(!filePath.exists())
+			try {
+				filePath.createNewFile();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		
 		
 	    if(!file.isEmpty()) {
 	    	PrintWriter writer ;
